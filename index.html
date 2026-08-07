@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BeautiFi — Verified mitigation work, settled at the source</title>
+<meta name="description" content="Salons run source-capture ventilation every day. BeautiFi records that work as it happens, verifies it, and turns it into audit-ready proof that sponsors can fund.">
+<link rel="canonical" href="https://beautifi.io/">
+<meta name="theme-color" content="#1E3A34">
+
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="BeautiFi">
+<meta property="og:url" content="https://beautifi.io/">
+<meta property="og:title" content="BeautiFi — Verified mitigation work, settled at the source">
+<meta property="og:description" content="Salons run source-capture ventilation every day, at their own cost. BeautiFi records that work as it happens, verifies it against physics, and turns it into audit-ready proof that sponsors can fund.">
+<meta property="og:image" content="https://beautifi.io/og-image.png">
+<meta property="og:image:type" content="image/png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="BeautiFi — Clean air is work. Now it's recorded and rewarded.">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="BeautiFi — Verified mitigation work, settled at the source">
+<meta name="twitter:description" content="Salons run source-capture ventilation every day. BeautiFi records it, verifies it against physics, and turns it into audit-ready proof that sponsors can fund.">
+<meta name="twitter:image" content="https://beautifi.io/og-image.png">
+<meta name="twitter:image:alt" content="BeautiFi — Clean air is work. Now it's recorded and rewarded.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+/* ============================================================
+   BeautiFi — tokens
+   Bridges the deck's editorial palette with the product UI.
+   ============================================================ */
+:root{
+  --ink:#1E3A34; --ink-2:#2C4A43; --ink-3:#3d5a58;
+  --paper:#F7F4EC; --paper-2:#FFFFFF; --paper-3:#F2EEE2; --paper-4:#EFEFE7;
+  --line:#DCD3BD; --line-2:#E5DECC;
+  --muted:#5C6B64; --muted-2:#8A958E; --muted-3:#7E9488;
+  --gold:#C2913A; --gold-dk:#9E7322; --gold-lt:#D9B765;
+  --sage:#6E8C80; --sage-lt:#9FB4A8;
+  --pass:#2D7A5A;
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'Hanken Grotesk',system-ui,-apple-system,sans-serif;
+  --mono:'Spline Sans Mono',ui-monospace,monospace;
+  --wrap:1180px;
+  --r:14px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.6;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}
+section{padding:112px 0}
+.dark{background:var(--ink);color:var(--paper-4)}
+.dark .eyebrow-txt{color:var(--gold-lt)}
+.dark h2{color:var(--paper-4)}
+.dark .lede,.dark p{color:#B9C9C0}
+
+/* eyebrow */
+.eyebrow{display:flex;align-items:center;gap:14px;margin-bottom:26px}
+.eyebrow .rule{height:2px;width:44px;background:var(--gold);opacity:.85;flex:0 0 auto}
+.eyebrow-txt{font-family:var(--mono);font-size:13px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dk);font-weight:500}
+
+h1{font-family:var(--serif);font-weight:500;font-size:clamp(38px,6vw,72px);line-height:1.06;letter-spacing:-.015em}
+h2{font-family:var(--serif);font-weight:500;font-size:clamp(28px,3.9vw,50px);line-height:1.12;letter-spacing:-.012em;max-width:22ch}
+h3{font-family:var(--serif);font-weight:600;font-size:22px;line-height:1.25}
+.it{font-style:italic;color:var(--gold-dk)}
+.dark .it{color:var(--gold-lt)}
+.lede{font-size:clamp(17px,1.5vw,21px);line-height:1.62;color:var(--muted);max-width:56ch}
+.mono-note{font-family:var(--mono);font-size:13px;letter-spacing:.04em;color:var(--muted-2)}
+
+/* nav */
+header.nav{position:sticky;top:0;z-index:60;background:rgba(247,244,236,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-2)}
+.nav-in{max-width:var(--wrap);margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:inherit}
+.brand-mark{width:34px;height:34px;border-radius:9px;background:var(--ink);display:grid;place-items:center;flex:0 0 auto}
+.brand-mark span{display:block;width:17px;height:2px;background:var(--gold);border-radius:2px;box-shadow:0 5px 0 var(--paper-4)}
+.brand-name{font-family:var(--serif);font-weight:600;font-size:20px;letter-spacing:-.01em}
+.brand-sub{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-2);margin-top:1px}
+.nav-links{display:flex;align-items:center;gap:26px}
+.nav-links a{font-size:15px;color:var(--muted);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--ink)}
+.btn{display:inline-block;font-family:var(--sans);font-size:15px;font-weight:600;padding:11px 22px;border-radius:999px;text-decoration:none;transition:transform .18s ease,box-shadow .18s ease,background .18s}
+.btn-p{background:var(--gold);color:#fff;box-shadow:0 6px 18px -8px rgba(158,115,34,.8)}
+.btn-p:hover{transform:translateY(-1px);background:var(--gold-dk)}
+.btn-g{border:1px solid var(--line);color:var(--ink)}
+.btn-g:hover{background:var(--paper-3)}
+@media(max-width:860px){.nav-links{display:none}}
+
+/* hero */
+.hero{background:var(--ink);color:var(--paper-4);padding:132px 0 118px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;inset:auto -10% -60% 40%;height:70%;background:radial-gradient(ellipse at center,rgba(194,145,58,.16),transparent 65%);pointer-events:none}
+.hero h1{max-width:15ch;position:relative}
+.hero .lede{color:#B9C9C0;margin-top:26px;max-width:52ch;position:relative}
+.hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px;position:relative}
+.hero .btn-g{border-color:rgba(239,239,231,.3);color:var(--paper-4)}
+.hero .btn-g:hover{background:rgba(239,239,231,.08)}
+
+/* generic grid */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:72px;align-items:center}
+@media(max-width:900px){.two{grid-template-columns:1fr;gap:44px}}
+.three{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:52px}
+@media(max-width:900px){.three{grid-template-columns:1fr;gap:22px}}
+
+.step{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);padding:30px 28px}
+.dark .step{background:rgba(239,239,231,.05);border-color:rgba(239,239,231,.16)}
+.step .n{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dk);margin-bottom:14px}
+.dark .step .n{color:var(--gold-lt)}
+.step h3{margin-bottom:9px}
+.step p{font-size:16px;color:var(--muted);line-height:1.55}
+
+/* burden list */
+.burden{list-style:none;display:flex;flex-direction:column;gap:2px}
+.burden li{display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px dotted var(--line);font-size:18px}
+.burden li:last-child{border-bottom:0}
+.burden .tick{width:7px;height:7px;border-radius:50%;background:var(--gold);flex:0 0 auto}
+
+/* ============ product artifacts (mirror the real UI) ============ */
+.card-art{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 26px 60px -38px rgba(30,58,52,.5);overflow:hidden}
+.wc{padding:18px 20px}
+.wc-row{display:flex;gap:14px;align-items:flex-start}
+.wc-node{width:42px;height:42px;border-radius:11px;display:grid;place-items:center;font-family:var(--mono);font-size:13px;font-weight:500;flex:0 0 auto;background:rgba(61,90,88,.09);color:var(--ink-3);border:1.5px solid rgba(61,90,88,.28)}
+.wc-body{flex:1;min-width:0}
+.wc-id{display:flex;align-items:baseline;gap:9px;flex-wrap:wrap}
+.wc-name{font-weight:600;font-size:17px}
+.wc-loc{font-size:14px;color:var(--muted-2)}
+.wc-sum{font-size:15px;color:var(--ink-2);margin-top:3px}
+.wc-when{font-family:var(--mono);font-size:12px;color:var(--muted-2);margin-top:3px}
+.wc-time{font-family:var(--mono);font-size:12px;color:var(--muted-2);flex:0 0 auto}
+.wc-acts{display:flex;align-items:center;gap:14px;padding:10px 0 0 56px;font-size:13px;color:var(--muted-2)}
+.wc-acts .sep{width:1px;height:13px;background:var(--line)}
+.wc-acts .a{cursor:default}
+.wc-acts .more{margin-left:auto;font-size:13px;color:var(--muted)}
+
+/* proof tree */
+.proof{border-top:1px solid var(--line-2);background:var(--paper-3);padding:18px 20px 20px}
+.proof-layer + .proof-layer{margin-top:16px}
+.proof-label{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--muted-2);margin-bottom:7px}
+.proof-row{display:grid;grid-template-columns:150px 1fr;gap:14px;padding:5px 0;font-size:13.5px}
+.proof-row .k{color:var(--muted)}
+.proof-row .v{font-family:var(--mono);font-size:12.5px;color:var(--ink-2);word-break:break-word}
+.proof-row .v.pass{color:var(--pass);font-weight:500}
+.pin{display:inline-flex;align-items:center;gap:5px;font-family:var(--mono);font-size:11.5px;background:rgba(61,90,88,.1);color:var(--ink-3);padding:2px 8px;border-radius:6px}
+@media(max-width:560px){.proof-row{grid-template-columns:1fr;gap:2px}}
+
+/* sponsor card */
+.sp{border-radius:var(--r);overflow:hidden;border:1px solid var(--line);box-shadow:0 26px 60px -38px rgba(30,58,52,.5)}
+.sp-hero{position:relative;padding:30px 28px 26px;background:linear-gradient(135deg,#2C4A43,#1E3A34 60%);color:var(--paper-4);overflow:hidden}
+.sp-hero:after{content:"";position:absolute;inset:-40% -30% auto auto;width:70%;height:180%;background:radial-gradient(ellipse at center,rgba(217,183,101,.22),transparent 60%);pointer-events:none}
+.sp-pill{position:absolute;top:20px;right:22px;display:flex;align-items:center;gap:7px;font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;background:rgba(239,239,231,.12);border:1px solid rgba(239,239,231,.22);padding:5px 11px;border-radius:999px}
+.sp-brand{display:flex;align-items:center;gap:14px;position:relative}
+.sp-logo{width:48px;height:48px;border-radius:50%;background:rgba(239,239,231,.12);border:1px solid rgba(239,239,231,.28);display:grid;place-items:center;font-family:var(--serif);font-size:21px;font-weight:600;flex:0 0 auto}
+.sp-name{font-family:var(--serif);font-size:26px;font-weight:600;line-height:1.1}
+.sp-sub{font-size:13px;color:#B9C9C0;margin-top:2px}
+.sp-claim{position:relative;margin-top:22px;display:flex;align-items:center;gap:14px;background:rgba(15,35,30,.5);border:1px solid rgba(239,239,231,.13);border-radius:11px;padding:15px 17px}
+.sp-check{width:30px;height:30px;border-radius:50%;background:var(--pass);color:#fff;display:grid;place-items:center;font-size:15px;flex:0 0 auto}
+.sp-claim-h{font-size:15.5px;line-height:1.35}
+.sp-claim-h b{color:var(--gold-lt);font-weight:600}
+.sp-claim-s{font-size:12.5px;color:#9FB4A8;margin-top:3px}
+.sp-foot{display:flex;align-items:center;gap:10px;flex-wrap:wrap;padding:14px 22px;background:var(--paper-2);border-top:1px solid var(--line-2)}
+.chip{font-family:var(--mono);font-size:11px;background:var(--paper-3);border:1px solid var(--line-2);color:var(--muted);padding:4px 10px;border-radius:6px}
+.sp-foot .when{margin-left:auto;font-family:var(--mono);font-size:11.5px;color:var(--muted-2)}
+
+/* ============ live record ============ */
+.live-shell{background:var(--paper-2);border:1px solid var(--line);border-radius:16px;overflow:hidden;box-shadow:0 30px 70px -44px rgba(30,58,52,.55)}
+.live-top{display:flex;align-items:center;justify-content:space-between;padding:15px 22px;border-bottom:1px solid var(--line-2);background:var(--paper-3)}
+.live-count{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+.live-flag{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11.5px;letter-spacing:.1em;text-transform:uppercase;color:var(--pass)}
+.dot{width:8px;height:8px;border-radius:50%;background:var(--pass);flex:0 0 auto}
+.live-list{padding:16px 18px;display:flex;flex-direction:column;gap:12px}
+.live-list .card-art{box-shadow:none;border-radius:12px}
+.demo-tag{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dk);border:1px solid rgba(158,115,34,.4);border-radius:999px;padding:5px 13px}
+
+/* footer */
+footer{background:var(--ink);color:var(--paper-4);padding:96px 0 46px}
+.f-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;align-items:flex-end}
+.f-bar{margin-top:56px;padding-top:22px;border-top:1px solid rgba(239,239,231,.16);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;color:#8FA79A}
+footer a{color:var(--gold-lt);text-decoration:none}
+
+/* ============ where the sponsor's name shows up ============ */
+.surfaces{display:grid;grid-template-columns:1.4fr .9fr;gap:38px;align-items:start;margin-top:48px}
+@media(max-width:980px){.surfaces{grid-template-columns:1fr;gap:30px}}
+.surf-cap{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-dk);margin-bottom:13px}
+
+.browser{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--paper-2);box-shadow:0 30px 70px -46px rgba(30,58,52,.55)}
+.bw-bar{display:flex;align-items:center;gap:12px;padding:9px 13px;background:var(--paper-3);border-bottom:1px solid var(--line-2)}
+.bw-dots{display:flex;gap:6px;flex:0 0 auto}
+.bw-dots i{width:9px;height:9px;border-radius:50%;background:var(--line)}
+.bw-url{flex:1;display:flex;align-items:center;gap:7px;background:var(--paper-2);border:1px solid var(--line-2);border-radius:999px;padding:5px 13px;font-family:var(--mono);font-size:11.5px;color:var(--muted);min-width:0}
+.bw-url .lock{color:var(--pass);font-size:10px}
+.bw-url b{font-weight:400;color:var(--ink-2)}
+
+.pf-cover{position:relative;padding:26px;background:linear-gradient(135deg,#2C4A43,#1E3A34 62%);color:var(--paper-4);overflow:hidden}
+.pf-cover:after{content:"";position:absolute;inset:-60% -25% auto auto;width:62%;height:220%;background:radial-gradient(ellipse at center,rgba(217,183,101,.22),transparent 62%);pointer-events:none}
+.pf-id{display:flex;align-items:center;gap:15px;position:relative}
+.pf-logo{width:54px;height:54px;border-radius:50%;background:rgba(239,239,231,.13);border:1px solid rgba(239,239,231,.3);display:grid;place-items:center;font-family:var(--serif);font-size:23px;font-weight:600;flex:0 0 auto}
+.pf-name{font-family:var(--serif);font-size:28px;font-weight:600;line-height:1.1}
+.pf-role{font-family:var(--mono);font-size:11px;letter-spacing:.13em;text-transform:uppercase;color:var(--gold-lt);margin-top:5px}
+.pf-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line-2)}
+@media(max-width:620px){.pf-stats{grid-template-columns:1fr}}
+.pf-stat{background:var(--paper-2);padding:17px 20px}
+.pf-k{font-family:var(--mono);font-size:10px;letter-spacing:.13em;text-transform:uppercase;color:var(--muted-2);margin-bottom:6px}
+.pf-v{font-family:var(--serif);font-size:25px;font-weight:600;color:var(--ink);line-height:1.1}
+.pf-v small{font-family:var(--sans);font-size:13px;font-weight:400;color:var(--muted);display:block;margin-top:3px}
+.pf-foot{display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;padding:15px 20px;border-top:1px solid var(--line-2);background:var(--paper-2)}
+.pf-verified{display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--muted)}
+.btn-sm{font-family:var(--sans);font-size:13px;font-weight:600;padding:8px 16px;border-radius:999px;background:var(--ink);color:var(--paper-4);text-decoration:none;white-space:nowrap}
+
+.badge{border:1px solid var(--line);border-radius:12px;background:var(--paper-2);padding:17px 19px;box-shadow:0 18px 44px -36px rgba(30,58,52,.5)}
+.badge-row{display:flex;align-items:center;gap:12px}
+.badge-logo{width:38px;height:38px;border-radius:50%;background:var(--ink);color:var(--gold-lt);display:grid;place-items:center;font-family:var(--serif);font-size:17px;font-weight:600;flex:0 0 auto}
+.badge-n{font-weight:600;font-size:15px;line-height:1.2}
+.badge-s{font-family:var(--mono);font-size:11px;color:var(--muted-2);margin-top:3px}
+.badge-stat{margin-top:14px;padding-top:13px;border-top:1px dotted var(--line)}
+.badge-big{font-family:var(--serif);font-size:27px;font-weight:600;color:var(--ink);line-height:1.05}
+.badge-lbl{font-size:13px;color:var(--muted);margin-top:3px}
+.badge-foot{display:flex;align-items:center;gap:7px;margin-top:13px;font-family:var(--mono);font-size:10.5px;letter-spacing:.05em;color:var(--pass)}
+
+.snippet{margin-top:15px;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--ink)}
+.snippet-top{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:8px 10px 8px 13px;background:rgba(239,239,231,.06);border-bottom:1px solid rgba(239,239,231,.13);font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:#9FB4A8}
+.copy{font-family:var(--mono);font-size:10px;letter-spacing:.12em;text-transform:uppercase;background:transparent;border:1px solid rgba(239,239,231,.28);color:var(--gold-lt);padding:4px 12px;border-radius:999px;cursor:pointer;transition:background .18s ease,color .18s ease,border-color .18s ease}
+.copy:hover{background:rgba(217,183,101,.15)}
+.copy.done{color:var(--sage-lt);border-color:rgba(159,180,168,.55)}
+.snippet pre{margin:0;padding:13px 14px;overflow-x:auto}
+.snippet code{font-family:var(--mono);font-size:11.5px;line-height:1.7;color:#C4D3CA;white-space:pre}
+
+/* sponsor card sitting inside the feed */
+.live-list .sp{box-shadow:none;border-radius:12px}
+
+/* ============ documents ============ */
+.docs{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;margin-top:46px}
+@media(max-width:980px){.docs{grid-template-columns:1fr;gap:20px}}
+.doc{background:var(--paper-2);border:1px solid var(--line);border-radius:var(--r);
+  padding:28px 26px;display:flex;flex-direction:column;
+  transition:box-shadow .28s ease,transform .28s ease}
+.doc-tag{font-family:var(--mono);font-size:10px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--muted-2);margin-bottom:12px}
+.doc h3{margin:0 0 12px}
+.doc p{font-size:15px;line-height:1.6;color:var(--muted);flex:1}
+.doc .go{display:inline-flex;align-items:center;gap:9px;margin-top:22px;text-decoration:none;
+  font-family:var(--mono);font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--gold-dk);transition:color .2s ease}
+.doc .go:hover{color:var(--ink)}
+.doc .go .arw{transition:transform .22s ease}
+.doc .go:hover .arw{transform:translateX(4px)}
+@media(hover:hover){.doc:hover{transform:translateY(-2px);box-shadow:0 16px 34px -26px rgba(30,58,52,.45)}}
+
+/* ============ motion — restrained, and opt-out honoured ============ */
+
+/* scroll progress hairline */
+.progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:80;
+  background:linear-gradient(90deg,var(--gold-dk),var(--gold-lt));pointer-events:none}
+
+/* section entrances — copy rises, artifacts settle in with a touch of scale */
+.js .reveal{opacity:0;transform:translateY(18px)}
+.js .reveal.in{opacity:1;transform:none;
+  transition:opacity .72s cubic-bezier(.2,.6,.2,1),transform .72s cubic-bezier(.2,.6,.2,1)}
+.js .reveal.art{transform:translateY(26px) scale(.986)}
+.js .reveal.art.in{transform:none;transition-duration:.9s}
+
+/* ambient drift on the dark panels — very slow, easy to miss, which is the point */
+.hero:after{animation:drift 30s ease-in-out infinite}
+.sp-hero:after,.pf-cover:after{animation:drift 34s ease-in-out infinite}
+@keyframes drift{0%,100%{transform:translate3d(0,0,0) scale(1)}
+  50%{transform:translate3d(-5%,4%,0) scale(1.1)}}
+
+.pulse{animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.82)}}
+
+/* feed cards in… */
+.arrive{animation:arrive .66s cubic-bezier(.2,.7,.2,1)}
+@keyframes arrive{from{opacity:0;transform:translateY(-14px)}to{opacity:1;transform:none}}
+/* …and out: collapse rather than vanish, so the list never jumps */
+.leaving{overflow:hidden;pointer-events:none;
+  transition:height .52s cubic-bezier(.4,0,.2,1),opacity .34s ease,margin-bottom .52s cubic-bezier(.4,0,.2,1)}
+
+.card-art,.step,.badge{transition:box-shadow .28s ease,transform .28s ease}
+@media(hover:hover){
+  .live-list .card-art:hover,.live-list .sp:hover{transform:translateY(-2px);box-shadow:0 14px 30px -20px rgba(30,58,52,.55)}
+  .step:hover{transform:translateY(-2px);box-shadow:0 16px 34px -26px rgba(30,58,52,.45)}
+}
+
+/* soft section seams instead of hard rules */
+.seamed{position:relative}
+.seamed:before,.seamed.seam-b:after{content:"";position:absolute;left:0;right:0;height:1px;
+  background:linear-gradient(90deg,transparent,var(--line) 22%,var(--line) 78%,transparent)}
+.seamed:before{top:0}
+.seamed.seam-b:after{bottom:0}
+
+/* Reduced motion: no travel, no drift, no autonomous animation — but a plain
+   opacity fade stays, and the progress hairline tracks the user's own scroll. */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .js .reveal,.js .reveal.art{opacity:0;transform:none}
+  .js .reveal.in,.js .reveal.art.in{opacity:1;transform:none;transition:opacity .5s ease}
+  .pulse,.arrive,.hero:after,.sp-hero:after,.pf-cover:after{animation:none}
+  .card-art,.step,.badge,.leaving{transition:none}
+}
+</style>
+</head>
+<body>
+
+<div class="progress" id="progress"></div>
+
+<header class="nav">
+  <div class="nav-in">
+    <a class="brand" href="#top">
+      <span class="brand-mark"><span></span></span>
+      <span>
+        <span class="brand-name">BeautiFi</span>
+        <span class="brand-sub">Secured by DUSN</span>
+      </span>
+    </a>
+    <nav class="nav-links">
+      <a href="#work">The work</a>
+      <a href="#how">How it works</a>
+      <a href="#sponsors">For sponsors</a>
+      <a href="#record">The record</a>
+      <a href="#docs">Docs</a>
+    </nav>
+    <a class="btn btn-p" href="#start">Become a sponsor</a>
+  </div>
+</header>
+
+<!-- ============ HERO ============ -->
+<div class="hero" id="top">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="rule"></span><span class="eyebrow-txt">Verified mitigation work, settled at the source</span></div>
+    <h1 class="reveal">Clean air is work.<br>Now it's <span class="it">recorded</span> — and rewarded.</h1>
+    <p class="lede reveal">Nail salons run source-capture ventilation all day, at their own cost. BeautiFi records that work as it happens, verifies it against physics, and turns it into audit-ready proof that sponsors can fund.</p>
+    <div class="hero-cta reveal">
+      <a class="btn btn-p" href="#start">Become a sponsor</a>
+      <a class="btn btn-g" href="#record">See the live record</a>
+    </div>
+  </div>
+</div>
+
+<!-- ============ THE BURDEN ============ -->
+<section id="work">
+  <div class="wrap two">
+    <div>
+      <div class="eyebrow reveal"><span class="rule"></span><span class="eyebrow-txt">Who keeps the air clean</span></div>
+      <h2 class="reveal">The people keeping salon air clean are the owners themselves.</h2>
+      <p class="lede reveal" style="margin-top:24px">There's a lot of talk about clean air and doing good. But in a salon it's real work, and it falls on one person.</p>
+      <p class="lede reveal" style="margin-top:18px">For a long time nobody could help — not because they didn't care, but because there was no way to know it was happening. <strong style="color:var(--ink-2)">That's what BeautiFi changes.</strong></p>
+    </div>
+    <ul class="burden reveal">
+      <li><span class="tick"></span>They buy the ventilation.</li>
+      <li><span class="tick"></span>They pay to put it in.</li>
+      <li><span class="tick"></span>They pay to keep it running.</li>
+      <li><span class="tick"></span>They pay for the electricity.</li>
+      <li><span class="tick"></span>They run it every single day.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ============ WHAT CHANGED ============ -->
+<section class="seamed seam-b" style="background:var(--paper-3)">
+  <div class="wrap two">
+    <div>
+      <div class="eyebrow reveal"><span class="rule"></span><span class="eyebrow-txt">What changed</span></div>
+      <h2 class="reveal">Running ventilation isn't just a cost — <span class="it">now every hour counts</span>.</h2>
+      <p class="lede reveal" style="margin-top:24px">You don't have to change a thing. You already own the ventilation and use it every day. BeautiFi simply records what you already do, and checks it.</p>
+      <p class="lede reveal" style="margin-top:18px">Each hour that passes its checks becomes a <strong style="color:var(--ink-2)">Verified Mitigation Hour</strong> — a public, sealed record of source-capture operation that anyone can open and re-check.</p>
+    </div>
+
+    <!-- real work card + proof tree -->
+    <div class="card-art reveal art">
+      <div class="wc">
+        <div class="wc-row">
+          <div class="wc-node">BB</div>
+          <div class="wc-body">
+            <div class="wc-id"><span class="wc-name">Bloom Beauty</span><span class="wc-loc">Nashville, TN</span></div>
+            <div class="wc-sum">1 Verified Mitigation Hour of source-capture operation</div>
+            <div class="wc-when">Aug 7, 2026 &nbsp;|&nbsp; 10:15:46 AM — 11:15:46 AM</div>
+          </div>
+          <span class="wc-time">4m ago</span>
+        </div>
+        <div class="wc-acts">
+          <span class="a">👏 0</span><span class="sep"></span><span class="a">Share ↗</span><span class="sep"></span><span class="a">Proof ↗</span>
+          <span class="more">Details ▾</span>
+        </div>
+      </div>
+      <div class="proof">
+        <div class="proof-layer">
+          <div class="proof-label">What happened</div>
+          <div class="proof-row"><span class="k">Salon</span><span class="v">Bloom Beauty · Nashville, TN</span></div>
+          <div class="proof-row"><span class="k">Work recognized</span><span class="v">1 hour of source-capture mitigation under burden-associated conditions</span></div>
+          <div class="proof-row"><span class="k">Checks passed</span><span class="v pass">5/5 validation checks</span></div>
+          <div class="proof-row"><span class="k">Recorded</span><span class="v">Aug 7, 11:15 AM</span></div>
+        </div>
+        <div class="proof-layer">
+          <div class="proof-label">How it was verified</div>
+          <div class="proof-row"><span class="k">Air quality sensors</span><span class="v">VOC levels sampled every 12 seconds</span></div>
+          <div class="proof-row"><span class="k">Fan operation</span><span class="v">Mechanical continuity confirmed throughout</span></div>
+          <div class="proof-row"><span class="k">Anti-spoofing</span><span class="v">Chemical decay matched real airflow physics</span></div>
+        </div>
+        <div class="proof-layer">
+          <div class="proof-label">Technical proof</div>
+          <div class="proof-row"><span class="k">Epoch ID</span><span class="v">epoch_btfi-device-007_1</span></div>
+          <div class="proof-row"><span class="k">Evidence fingerprint</span><span class="v">062a84276e8ed25d81613fb256c3f889…</span></div>
+          <div class="proof-row"><span class="k">Methodology</span><span class="v"><span class="pin">↲ v0.1.0</span></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE LOGIC ============ -->
+<section class="dark">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="rule"></span><span class="eyebrow-txt">The logic</span></div>
+    <h2 class="reveal" style="max-width:20ch;font-size:clamp(26px,3.4vw,44px)">When the work is recorded, <span class="it">people can see it</span>.</h2>
+    <h2 class="reveal" style="max-width:20ch;font-size:clamp(26px,3.4vw,44px);margin-top:18px">When people can see it, <span class="it">they can support it</span>.</h2>
+    <p class="lede reveal" style="margin-top:34px;max-width:46ch">And the people doing the work can finally be rewarded by the people who care.</p>
+  </div>
+</section>
+
+<!-- ============ HOW IT WORKS ============ -->
+<section id="how">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="rule"></span><span class="eyebrow-txt">How it works</span></div>
+    <h2 class="reveal">Three steps, start to finish.</h2>
+    <div class="three">
+      <div class="step reveal"><div class="n">Operate</div><h3>The salon runs its ventilation.</h3><p>Sensors record each hour as it happens — not from a form filled out later.</p></div>
+      <div class="step reveal"><div class="n">Verify</div><h3>Each hour is checked.</h3><p>Five validation events per hour, tested against airflow physics, then sealed into a public record that can't be edited.</p></div>
+      <div class="step reveal"><div class="n">Settle</div><h3>The salon is rewarded.</h3><p>Sponsors retire verified hours, and that support goes straight to the operators who earned them.</p></div>
+    </div>
+    <p class="mono-note reveal" style="margin-top:30px">Nothing on the record can be changed in secret, and every figure traces back to the evidence behind it.</p>
+  </div>
+</section>
+
+<!-- ============ FOR SPONSORS ============ -->
+<section id="sponsors" class="seamed seam-b" style="background:var(--paper-3)">
+  <div class="wrap two">
+    <div>
+      <div class="eyebrow reveal"><span class="rule"></span><span class="eyebrow-txt">For sponsors</span></div>
+      <h2 class="reveal">Most claims ask to be believed. <span class="it">This one can be checked.</span></h2>
+      <p class="lede reveal" style="margin-top:24px">Your sponsorship retires verified mitigation hours from the public pool — non-duplicably, with your name on the settlement.</p>
+      <p class="lede reveal" style="margin-top:18px">Behind it sits the proof. Every hour is methodology-pinned and evidence-linked, open to independent reproduction. <strong style="color:var(--ink-2)">Your claim is never just your word.</strong></p>
+    </div>
+
+    <div class="sp reveal art">
+      <div class="sp-hero">
+        <span class="sp-pill"><span class="dot" style="background:var(--sage-lt)"></span>VMH Retired</span>
+        <div class="sp-brand">
+          <div class="sp-logo">L</div>
+          <div>
+            <div class="sp-name">Lumio Beauty Co.</div>
+            <div class="sp-sub">Outcome-driven capital · Verified mitigation work</div>
+          </div>
+        </div>
+        <div class="sp-claim">
+          <div class="sp-check">✓</div>
+          <div>
+            <div class="sp-claim-h"><b>1 Verified Mitigation Hour</b> retired from the public pool</div>
+            <div class="sp-claim-s">Immutable audit-ready proof · Settled on-chain · Non-duplicable</div>
+          </div>
+        </div>
+      </div>
+      <div class="sp-foot">
+        <span class="chip">↲ Methodology v0.1.0</span>
+        <span class="chip">RET_E2D713EE75AE63B605281C43…</span>
+        <span class="when">46m ago</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ YOUR NAME GOES ON ============ -->
+<section id="name">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="rule"></span><span class="eyebrow-txt">Your name goes on</span></div>
+    <h2 class="reveal" style="max-width:26ch">Recognition you can point at — <span class="it">and anyone can check</span>.</h2>
+    <p class="lede reveal" style="margin-top:22px;max-width:62ch">Sponsorship isn't a line item that disappears into a report. Your support becomes a public page with your name on it, a badge you can put anywhere, and a branded entry in the feed every time you settle.</p>
+
+    <div class="surfaces">
+      <!-- surface 1 — the public profile -->
+      <div class="reveal">
+        <div class="surf-cap">1 · Your public page</div>
+        <div class="browser">
+          <div class="bw-bar">
+            <span class="bw-dots"><i></i><i></i><i></i></span>
+            <span class="bw-url"><span class="lock">🔒</span>beautifi.io/sponsor/<b>lumio-beauty</b></span>
+          </div>
+          <div class="pf-cover">
+            <div class="pf-id">
+              <div class="pf-logo">L</div>
+              <div>
+                <div class="pf-name">Lumio Beauty Co.</div>
+                <div class="pf-role">Sponsor · Verified mitigation work</div>
+              </div>
+            </div>
+          </div>
+          <div class="pf-stats">
+            <div class="pf-stat"><div class="pf-k">Hours retired</div><div class="pf-v"><span class="num" data-to="2480">2,480</span><small>Verified Mitigation Hours</small></div></div>
+            <div class="pf-stat"><div class="pf-k">Salons supported</div><div class="pf-v"><span class="num" data-to="41">41</span><small>Across California</small></div></div>
+            <div class="pf-stat"><div class="pf-k">Sealed</div><div class="pf-v">Apr 2<small>2026 · can't be edited</small></div></div>
+          </div>
+          <div class="pf-foot">
+            <span class="pf-verified"><span class="dot" style="background:var(--pass)"></span>Independently re-checked by 37 outside parties</span>
+            <a class="btn-sm" href="#record">Verify this record</a>
+          </div>
+        </div>
+        <p class="mono-note" style="margin-top:12px">A real URL you can send to anyone — press, partners, your board.</p>
+      </div>
+
+      <!-- surface 2 — the portable badge -->
+      <div class="reveal">
+        <div class="surf-cap">2 · A badge you can embed</div>
+        <div class="badge">
+          <div class="badge-row">
+            <div class="badge-logo">L</div>
+            <div>
+              <div class="badge-n">Lumio Beauty Co.</div>
+              <div class="badge-s">Sponsor · BeautiFi</div>
+            </div>
+          </div>
+          <div class="badge-stat">
+            <div class="badge-big"><span class="num" data-to="2480">2,480</span></div>
+            <div class="badge-lbl">Verified Mitigation Hours retired</div>
+          </div>
+          <div class="badge-foot">✓ Independently verifiable · beautifi.io</div>
+        </div>
+
+        <div class="snippet">
+          <div class="snippet-top"><span>Embed code</span><button class="copy" type="button" id="copyBadge">Copy</button></div>
+          <pre><code id="badgeSnippet">&lt;a href="https://beautifi.io/sponsor/lumio-beauty"&gt;
+  &lt;img src="https://beautifi.io/badge/lumio-beauty.svg"
+       alt="Lumio Beauty Co. — 2,480 Verified
+            Mitigation Hours retired"&gt;
+&lt;/a&gt;</code></pre>
+        </div>
+        <p class="mono-note" style="margin-top:12px">One line into an ESG report, a site footer, a pitch deck. The badge stays current, and it links back to the live record.</p>
+
+        <div class="surf-cap" style="margin-top:30px">3 · In the public feed</div>
+        <p style="font-size:15.5px;color:var(--muted);line-height:1.55">Every settlement posts a branded card into the timeline above — your logo and name carried alongside the work you paid for, seen by everyone reading the record.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ THE LIVE RECORD ============ -->
+<section id="record">
+  <div class="wrap">
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap">
+      <div>
+        <div class="eyebrow reveal"><span class="rule"></span><span class="eyebrow-txt">The public record</span></div>
+        <h2 class="reveal">Every hour lands here, <span class="it">as it happens</span>.</h2>
+      </div>
+      <span class="demo-tag reveal">Illustrative preview</span>
+    </div>
+
+    <p class="lede reveal" style="margin-top:22px;max-width:60ch">Work entries and sponsor settlements arrive in one public timeline. Each is methodology-pinned, evidence-linked, and independently reproducible.</p>
+
+    <div class="live-shell reveal art" style="margin-top:38px" id="liveShell">
+      <div class="live-top">
+        <span class="live-count"><span id="entryCount">5</span> entries</span>
+        <span class="live-flag"><span class="dot pulse"></span>Live</span>
+      </div>
+      <div class="live-list" id="liveList">
+        <div class="card-art">
+          <div class="wc">
+            <div class="wc-row">
+              <div class="wc-node">TS</div>
+              <div class="wc-body">
+                <div class="wc-id"><span class="wc-name">The Salon</span><span class="wc-loc">Chicago, IL</span></div>
+                <div class="wc-sum">1 Verified Mitigation Hour of source-capture operation</div>
+                <div class="wc-when">Aug 7, 2026 &nbsp;|&nbsp; 09:56:46 AM — 10:56:46 AM</div>
+              </div>
+              <span class="wc-time">23m ago</span>
+            </div>
+            <div class="wc-acts"><span class="a">👏 0</span><span class="sep"></span><span class="a">Share ↗</span><span class="sep"></span><span class="a">Proof ↗</span><span class="more">Details ▾</span></div>
+          </div>
+        </div>
+        <div class="sp">
+          <div class="sp-hero" style="padding:20px 22px">
+            <span class="sp-pill"><span class="dot" style="background:var(--sage-lt)"></span>VMH Retired</span>
+            <div class="sp-brand">
+              <div class="sp-logo" style="width:40px;height:40px;font-size:18px">M</div>
+              <div>
+                <div class="sp-name" style="font-size:21px">Meridian Impact</div>
+                <div class="sp-sub">Outcome-driven capital · Verified mitigation work</div>
+              </div>
+            </div>
+            <div class="sp-claim" style="margin-top:15px;padding:12px 14px">
+              <div class="sp-check" style="width:26px;height:26px;font-size:13px">✓</div>
+              <div><div class="sp-claim-h" style="font-size:14.5px"><b>1 Verified Mitigation Hour</b> retired from the public pool</div></div>
+            </div>
+          </div>
+          <div class="sp-foot" style="padding:11px 18px">
+            <span class="chip">↲ Methodology v0.1.0</span>
+            <span class="when">38m ago</span>
+          </div>
+        </div>
+        <div class="card-art">
+          <div class="wc">
+            <div class="wc-row">
+              <div class="wc-node">L</div>
+              <div class="wc-body">
+                <div class="wc-id"><span class="wc-name">Luminary</span><span class="wc-loc">Oakland, CA</span></div>
+                <div class="wc-sum">1 Verified Mitigation Hour of source-capture operation</div>
+                <div class="wc-when">Aug 7, 2026 &nbsp;|&nbsp; 09:10:46 AM — 10:10:46 AM</div>
+              </div>
+              <span class="wc-time">1h ago</span>
+            </div>
+            <div class="wc-acts"><span class="a">👏 0</span><span class="sep"></span><span class="a">Share ↗</span><span class="sep"></span><span class="a">Proof ↗</span><span class="more">Details ▾</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="mono-note reveal" style="margin-top:18px">Illustrative preview of the public feed — representative entries, not current network data.</p>
+  </div>
+</section>
+
+<!-- ============ DOCUMENTS ============ -->
+<section id="docs" class="seamed" style="background:var(--paper-3)">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="rule"></span><span class="eyebrow-txt">Documents</span></div>
+    <h2 class="reveal">Read the protocol for yourself.</h2>
+    <p class="lede reveal" style="margin-top:22px;max-width:64ch">BeautiFi settles on the <strong style="color:var(--ink-2)">Deterministic Utility Settlement Network (DUSN)</strong> — the protocol beneath it, where every epoch, every retirement, and every proof artifact is methodology-pinned, evidence-linked, and non-duplicable.</p>
+    <p class="lede reveal" style="margin-top:16px;max-width:60ch">The overview is public. The whitepaper and pitch deck are shared by request with qualified partners.</p>
+
+    <div class="docs">
+      <div class="doc reveal">
+        <div class="doc-tag">Overview · Public</div>
+        <h3>A Beautiful Vision</h3>
+        <p>Our first deployment, BeautiFi v1, equips beauty salons with ventilation and air-quality sensors, proves the clean-air work they do, and lets brands and ESG funds directly fund and retire that work with cryptographic proof. The long-term goal is shared infrastructure for many mitigation verticals — schools, homes, industry, water — so ESG capital flows straight to the people and places actually reducing exposure.</p>
+        <a class="go" href="https://docs.google.com/document/d/e/2PACX-1vSwy78NWsYF8hIRRoDu_ySGhIdswkE3zwuxMQ69gUp30u58Rnr2_VdCsIY-13ldN4Ol-edafpQ0wwN0/pub" target="_blank" rel="noopener">Read <span class="arw">→</span></a>
+      </div>
+
+      <div class="doc reveal">
+        <div class="doc-tag">Protocol · By request</div>
+        <h3>Whitepaper</h3>
+        <p>The full protocol: a utility-agnostic DePIN/RWA design that turns offloaded pollution into measurable, verifiable, retirable on-chain assets. Covers the architecture, tokenomics, security and MRV design, risks, and the roadmap from this first salon vertical out to air, water, heat, noise and health.</p>
+        <a class="go" href="https://forms.gle/trBTQLWvZnoe5BAA9" target="_blank" rel="noopener">Request access <span class="arw">→</span></a>
+      </div>
+
+      <div class="doc reveal">
+        <div class="doc-tag">Investors · By request</div>
+        <h3>Pitch deck</h3>
+        <p>A concise view of the problem, the solution, the market, and the pilot plan. Shared case-by-case with qualified investors and partners. Materials are confidential and subject to change.</p>
+        <a class="go" href="https://forms.gle/trBTQLWvZnoe5BAA9" target="_blank" rel="noopener">Request access <span class="arw">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ GETTING STARTED ============ -->
+<section id="start" class="seamed" style="background:var(--paper-3)">
+  <div class="wrap">
+    <div class="eyebrow reveal"><span class="rule"></span><span class="eyebrow-txt">Getting started</span></div>
+    <h2 class="reveal">Getting started is simple.</h2>
+    <div class="three">
+      <div class="step reveal"><div class="n">Choose</div><h3>Pick your reach.</h3><p>Decide how much to support, and where — a region, a set of salons, or the whole network.</p></div>
+      <div class="step reveal"><div class="n">Support</div><h3>Your name goes on.</h3><p>Your support is matched to real recorded hours, and your public settlement record goes live.</p></div>
+      <div class="step reveal"><div class="n">Show</div><h3>Share it anywhere.</h3><p>Put it in front of anyone — and they can check for themselves that it's real.</p></div>
+    </div>
+    <p class="mono-note reveal" style="margin-top:30px">Support by card or by stablecoin. BeautiFi never holds your money; it settles straight to the operators who earned it.</p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="f-top">
+      <div>
+        <div class="eyebrow"><span class="rule"></span><span class="eyebrow-txt" style="color:var(--gold-lt)">Become a sponsor</span></div>
+        <h2 style="color:var(--paper-4);max-width:16ch">Put your name on <span class="it">something real</span>.</h2>
+        <p class="lede" style="color:#B9C9C0;margin-top:20px;max-width:44ch">Real work, in real salons, that anyone can check. Let's find the right way for you to be part of it.</p>
+      </div>
+      <a class="btn btn-p" href="mailto:hello@beautifi.io">hello@beautifi.io</a>
+    </div>
+    <div class="f-bar">
+      <span>© 2026 BeautiFi · Secured by DUSN</span>
+      <span><a href="#docs">Documents</a> · <a href="https://forms.gle/trBTQLWvZnoe5BAA9" target="_blank" rel="noopener">Request the whitepaper</a> · <a href="mailto:hello@beautifi.io">hello@beautifi.io</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.documentElement.classList.add('js');
+
+/* reveal on scroll — one-shot, no parallax, no scroll-jacking */
+(function(){
+  var els = document.querySelectorAll('.reveal');
+  if(!('IntersectionObserver' in window)){
+    els.forEach(function(e){e.classList.add('in')});
+    return;
+  }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){
+      if(!en.isIntersecting) return;
+      var el = en.target;
+      var sibs = Array.prototype.slice.call(el.parentNode.children).filter(function(n){return n.classList.contains('reveal')});
+      var i = sibs.indexOf(el);
+      el.style.transitionDelay = (i > 0 ? Math.min(i,4)*70 : 0) + 'ms';
+      el.classList.add('in');
+      io.unobserve(el);
+    });
+  },{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+  els.forEach(function(e){io.observe(e)});
+})();
+
+/* live record — a new entry arrives only while the panel is on screen */
+(function(){
+  var shell = document.getElementById('liveShell'),
+      list  = document.getElementById('liveList'),
+      count = document.getElementById('entryCount');
+  if(!shell || !list) return;
+  /* Reduced motion: entries still appear so the record reads as live,
+     but without the slide-in transition, and at a calmer cadence. */
+  var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var salons = [
+    {i:'BB', n:'Bloom Beauty',  l:'Nashville, TN'},
+    {i:'PN', n:'Pure Nails',    l:'Seattle, WA'},
+    {i:'GS', n:'Glow Studio',   l:'Boston, MA'},
+    {i:'NR', n:'The Nail Room', l:'Brooklyn, NY'}
+  ];
+  var k = 0, total = 5, timer = null;
+
+  function pad(n){return n < 10 ? '0'+n : ''+n}
+  function stamp(){
+    var d = new Date(), e = new Date(d.getTime()-3600000);
+    function t(x){var h=x.getHours(),m=x.getMinutes(),s=x.getSeconds(),ap=h>=12?'PM':'AM',hh=h%12||12;
+      return pad(hh)+':'+pad(m)+':'+pad(s)+' '+ap}
+    var dt = d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    return dt+' &nbsp;|&nbsp; '+t(e)+' — '+t(d);
+  }
+
+  var sponsors = [
+    {i:'M', n:'Meridian Impact'},
+    {i:'C', n:'Cedar Grove Partners'},
+    {i:'L', n:'Lumio Beauty Co.'}
+  ];
+  var sp = 1;
+
+  function workCard(){
+    var s = salons[k % salons.length];
+    return '<div class="wc"><div class="wc-row">'+
+      '<div class="wc-node">'+s.i+'</div>'+
+      '<div class="wc-body"><div class="wc-id"><span class="wc-name">'+s.n+'</span>'+
+      '<span class="wc-loc">'+s.l+'</span></div>'+
+      '<div class="wc-sum">1 Verified Mitigation Hour of source-capture operation</div>'+
+      '<div class="wc-when">'+stamp()+'</div></div>'+
+      '<span class="wc-time">Just now</span></div>'+
+      '<div class="wc-acts"><span class="a">👏 0</span><span class="sep"></span>'+
+      '<span class="a">Share ↗</span><span class="sep"></span><span class="a">Proof ↗</span>'+
+      '<span class="more">Details ▾</span></div></div>';
+  }
+
+  function sponsorCard(){
+    var p = sponsors[sp++ % sponsors.length];
+    return '<div class="sp-hero" style="padding:20px 22px">'+
+      '<span class="sp-pill"><span class="dot" style="background:var(--sage-lt)"></span>VMH Retired</span>'+
+      '<div class="sp-brand"><div class="sp-logo" style="width:40px;height:40px;font-size:18px">'+p.i+'</div>'+
+      '<div><div class="sp-name" style="font-size:21px">'+p.n+'</div>'+
+      '<div class="sp-sub">Outcome-driven capital · Verified mitigation work</div></div></div>'+
+      '<div class="sp-claim" style="margin-top:15px;padding:12px 14px">'+
+      '<div class="sp-check" style="width:26px;height:26px;font-size:13px">✓</div>'+
+      '<div><div class="sp-claim-h" style="font-size:14.5px"><b>1 Verified Mitigation Hour</b>'+
+      ' retired from the public pool</div></div></div></div>'+
+      '<div class="sp-foot" style="padding:11px 18px">'+
+      '<span class="chip">↲ Methodology v0.1.0</span>'+
+      '<span class="when">Just now</span></div>';
+  }
+
+  function add(){
+    var isSp = (k % 4 === 3);          /* every fourth arrival is a settlement */
+    var el = document.createElement('div');
+    el.className = (isSp ? 'sp' : 'card-art') + (calm ? '' : ' arrive');
+    el.innerHTML = isSp ? sponsorCard() : workCard();
+    k++;
+    list.insertBefore(el, list.firstChild);
+    var vis = Array.prototype.filter.call(list.children, function(c){
+      return !c.classList.contains('leaving');
+    });
+    while(vis.length > 4) retire(vis.pop());
+    count.textContent = ++total;
+  }
+
+  /* collapse the oldest entry out rather than snapping it away */
+  function retire(el){
+    if(calm){ if(el.parentNode) el.parentNode.removeChild(el); return; }
+    el.style.height = el.offsetHeight + 'px';
+    el.classList.add('leaving');
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        el.style.height = '0px';
+        el.style.opacity = '0';
+        el.style.marginBottom = '-12px';   /* absorbs the flex gap */
+      });
+    });
+    setTimeout(function(){ if(el.parentNode) el.parentNode.removeChild(el); }, 580);
+  }
+
+  var io = new IntersectionObserver(function(en){
+    if(en[0].isIntersecting){ if(!timer) timer = setInterval(add, calm ? 15000 : 9000); }
+    else { clearInterval(timer); timer = null; }
+  },{threshold:.25});
+  io.observe(shell);
+})();
+
+/* scroll progress hairline */
+(function(){
+  var bar = document.getElementById('progress');
+  if(!bar) return;
+  var queued = false;
+  function upd(){
+    var h = document.documentElement.scrollHeight - window.innerHeight;
+    var p = h > 0 ? window.scrollY / h : 0;
+    bar.style.width = (Math.max(0, Math.min(1, p)) * 100) + '%';
+    queued = false;
+  }
+  window.addEventListener('scroll', function(){
+    if(!queued){ queued = true; requestAnimationFrame(upd); }
+  }, {passive:true});
+  window.addEventListener('resize', upd);
+  upd();
+})();
+
+/* headline figures count up once, when they come into view */
+(function(){
+  var nums = document.querySelectorAll('.num');
+  if(!nums.length || !('IntersectionObserver' in window)) return;
+  if(window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  function run(el){
+    var to = parseInt(el.getAttribute('data-to'), 10) || 0, t0 = null, dur = 1150;
+    (function step(t){
+      if(t0 === null) t0 = t;
+      var p = Math.min(1, (t - t0) / dur),
+          e = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(to * e).toLocaleString('en-US');
+      if(p < 1) requestAnimationFrame(step);
+    })(performance.now());
+  }
+
+  var io = new IntersectionObserver(function(es){
+    es.forEach(function(en){
+      if(!en.isIntersecting) return;
+      run(en.target);
+      io.unobserve(en.target);
+    });
+  },{threshold:.5});
+
+  Array.prototype.forEach.call(nums, function(n){ n.textContent = '0'; io.observe(n); });
+})();
+
+/* copy the embed snippet — clipboard API where allowed, execCommand on file:// */
+(function(){
+  var btn = document.getElementById('copyBadge'),
+      src = document.getElementById('badgeSnippet');
+  if(!btn || !src) return;
+
+  function flash(ok){
+    btn.textContent = ok ? 'Copied' : 'Select it';
+    btn.classList.toggle('done', ok);
+    setTimeout(function(){ btn.textContent = 'Copy'; btn.classList.remove('done'); }, 1900);
+  }
+
+  btn.addEventListener('click', function(){
+    var text = src.textContent;
+    if(navigator.clipboard && window.isSecureContext){
+      navigator.clipboard.writeText(text).then(function(){flash(true)},function(){legacy(text)});
+    } else { legacy(text); }
+  });
+
+  function legacy(text){
+    var ta = document.createElement('textarea');
+    ta.value = text;
+    ta.setAttribute('readonly','');
+    ta.style.cssText = 'position:absolute;left:-9999px;top:0';
+    document.body.appendChild(ta);
+    ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch(e){ ok = false; }
+    document.body.removeChild(ta);
+    flash(ok);
+  }
+})();
+
+</script>
+</body>
+</html>

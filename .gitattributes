@@ -1,0 +1,8 @@
+# Pin LF so a Windows checkout can't rewrite line endings.
+# The protocol repo lost a day to CRLF-mangled configs in May 2026; same discipline here.
+*.html  text eol=lf
+*.svg   text eol=lf
+*.md    text eol=lf
+*.json  text eol=lf
+*.png   binary
+*.jpg   binary

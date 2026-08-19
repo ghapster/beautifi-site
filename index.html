@@ -95,16 +95,31 @@ header.nav{position:sticky;top:0;z-index:60;background:rgba(247,244,236,.86);bac
    as "something is happening" without shouting over the sponsor button. */
 .nav-links a.nav-live{display:inline-flex;align-items:center;gap:7px;color:var(--ink-2)}
 .nav-links a.nav-live:hover{color:var(--ink)}
+/* Two animations rather than one: the dot itself breathes, and a ring travels
+   out from under it. A ring alone was too easy to miss at 7px. */
 .nav-live-dot{
-  width:7px;height:7px;border-radius:50%;background:#2F6B4F;flex:0 0 auto;
-  box-shadow:0 0 0 0 rgba(47,107,79,.5);animation:navLive 2.4s infinite;
+  position:relative;width:8px;height:8px;border-radius:50%;flex:0 0 auto;
+  background:#2F6B4F;animation:navLiveDot 1.8s ease-in-out infinite;
 }
-@keyframes navLive{
-  0%{box-shadow:0 0 0 0 rgba(47,107,79,.5)}
-  70%{box-shadow:0 0 0 6px rgba(47,107,79,0)}
-  100%{box-shadow:0 0 0 0 rgba(47,107,79,0)}
+.nav-live-dot:after{
+  content:"";position:absolute;inset:0;border-radius:50%;
+  background:#2F6B4F;animation:navLiveRing 1.8s ease-out infinite;
 }
-@media (prefers-reduced-motion:reduce){.nav-live-dot{animation:none}}
+@keyframes navLiveDot{
+  0%,100%{transform:scale(1);   background:#2F6B4F}
+  50%    {transform:scale(1.18);background:#3E8A66}
+}
+@keyframes navLiveRing{
+  0%  {transform:scale(1);opacity:.55}
+  70% {transform:scale(3.2);opacity:0}
+  100%{transform:scale(3.2);opacity:0}
+}
+
+/* Deliberately NOT suppressed under prefers-reduced-motion. This was added
+   because the link needs to catch the eye, and a still dot does not do that.
+   It is a single small element well under the 3Hz flash threshold, and the
+   page honours the setting everywhere it costs nothing: the section reveals,
+   the ambient drift on the dark panels, the hero art. */
 .btn{display:inline-block;font-family:var(--sans);font-size:15px;font-weight:600;padding:11px 22px;border-radius:999px;text-decoration:none;transition:transform .18s ease,box-shadow .18s ease,background .18s}
 .btn-p{background:var(--gold);color:#fff;box-shadow:0 6px 18px -8px rgba(158,115,34,.8)}
 .btn-p:hover{transform:translateY(-1px);background:var(--gold-dk)}

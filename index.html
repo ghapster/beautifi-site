@@ -126,7 +126,48 @@ header.nav{position:sticky;top:0;z-index:60;background:rgba(247,244,236,.86);bac
 .btn-p:hover{transform:translateY(-1px);background:var(--gold-dk)}
 .btn-g{border:1px solid var(--line);color:var(--ink)}
 .btn-g:hover{background:var(--paper-3)}
-@media(max-width:860px){.nav-links{display:none}}
+/* ============ mobile navigation ============
+   Under 860px the inline links are hidden, so the burger and panel take over.
+   Above it they do not exist as far as the layout is concerned. */
+.nav-burger{display:none;background:none;border:0;padding:8px;margin:-8px -6px -8px 0;
+  cursor:pointer;color:var(--ink);border-radius:8px}
+.nav-burger:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.nav-burger-bars{display:block;width:22px;height:16px;position:relative}
+.nav-burger-bars i{position:absolute;left:0;right:0;height:2px;border-radius:2px;
+  background:currentColor;transition:transform .26s ease,opacity .2s ease,top .26s ease}
+.nav-burger-bars i:nth-child(1){top:0}
+.nav-burger-bars i:nth-child(2){top:7px}
+.nav-burger-bars i:nth-child(3){top:14px}
+/* Bars fold into a cross while open, so the control says how to close itself. */
+.nav-burger[aria-expanded="true"] i:nth-child(1){top:7px;transform:rotate(45deg)}
+.nav-burger[aria-expanded="true"] i:nth-child(2){opacity:0}
+.nav-burger[aria-expanded="true"] i:nth-child(3){top:7px;transform:rotate(-45deg)}
+
+.nav-panel{display:none;border-top:1px solid var(--line);background:var(--paper-2);
+  padding:10px 32px 22px}
+.nav-panel a{display:block;padding:15px 0;font-size:17px;color:var(--ink-2);
+  text-decoration:none;border-bottom:1px solid rgba(30,58,52,.08)}
+.nav-panel a:last-of-type{border-bottom:0}
+.nav-panel-live{display:flex;align-items:center}
+.nav-panel .nav-panel-cta{display:block;text-align:center;margin-top:16px;border-bottom:0}
+.nav-scrim{position:fixed;inset:0;background:rgba(15,28,24,.34);z-index:40;border:0}
+
+@media(max-width:860px){
+  .nav-links{display:none}
+  .nav-burger{display:block}
+  /* The header CTA duplicates the one inside the panel and crowds the burger
+     on a narrow screen, so the panel carries it instead. */
+  .nav-cta{display:none}
+  .nav-panel[data-open="1"]{display:block}
+}
+/* Never leave the panel or scrim on screen if the viewport grows past the
+   breakpoint while it is open. */
+@media(min-width:861px){
+  .nav-panel,.nav-scrim{display:none !important}
+}
+@media (prefers-reduced-motion:reduce){
+  .nav-burger-bars i{transition:none}
+}
 
 /* hero */
 .hero{background:var(--ink);color:var(--paper-4);padding:132px 0 118px;position:relative;overflow:hidden}
@@ -503,9 +544,29 @@ footer{
       </a>
       <a href="#docs">Docs</a>
     </nav>
-    <a class="btn btn-p" href="#start">Become a sponsor</a>
+    <a class="btn btn-p nav-cta" href="#start">Become a sponsor</a>
+
+    <!-- Shown under 860px, where .nav-links is hidden. Without this the six
+         links are simply unreachable on a phone. -->
+    <button class="nav-burger" id="navBurger" type="button"
+            aria-label="Open menu" aria-expanded="false" aria-controls="navPanel">
+      <span class="nav-burger-bars" aria-hidden="true"><i></i><i></i><i></i></span>
+    </button>
+  </div>
+
+  <div class="nav-panel" id="navPanel" hidden>
+    <a href="#work">The work</a>
+    <a href="#how">How it works</a>
+    <a href="#sponsors">For sponsors</a>
+    <a href="#record">The record</a>
+    <a class="nav-panel-live" href="https://beautifi-demo.onrender.com/feed.html" target="_blank" rel="noopener">
+      <span class="live-dot"></span>See it running &#8599;
+    </a>
+    <a href="#docs">Docs</a>
+    <a class="btn btn-p nav-panel-cta" href="#start">Become a sponsor</a>
   </div>
 </header>
+<div class="nav-scrim" id="navScrim" hidden></div>
 
 <!-- ============ HERO ============ -->
 <div class="hero" id="top">
@@ -871,6 +932,60 @@ footer{
 
 <script>
 document.documentElement.classList.add('js');
+
+/* ============================================================
+   MOBILE NAVIGATION
+   ============================================================
+   The header links are hidden under 860px, so without this they cannot be
+   reached on a phone at all.
+   ============================================================ */
+(function(){
+  var burger = document.getElementById('navBurger');
+  var panel  = document.getElementById('navPanel');
+  var scrim  = document.getElementById('navScrim');
+  if(!burger || !panel || !scrim) return;
+
+  var open = false;
+
+  function setOpen(next){
+    open = next;
+    burger.setAttribute('aria-expanded', next ? 'true' : 'false');
+    burger.setAttribute('aria-label', next ? 'Close menu' : 'Open menu');
+
+    // hidden and data-open are both needed: hidden keeps the links out of the
+    // accessibility tree and out of tab order when closed, data-open drives
+    // the display rule that only applies under the breakpoint.
+    if(next){
+      panel.hidden = false; scrim.hidden = false;
+      panel.setAttribute('data-open','1');
+    } else {
+      panel.removeAttribute('data-open');
+      panel.hidden = true; scrim.hidden = true;
+    }
+
+    // Stop the page scrolling behind the panel.
+    document.body.style.overflow = next ? 'hidden' : '';
+  }
+
+  burger.addEventListener('click', function(){ setOpen(!open); });
+  scrim.addEventListener('click', function(){ setOpen(false); });
+
+  // Tapping a link should navigate and get out of the way. The demo link opens
+  // in a new tab, so closing behind it leaves the page where it was.
+  panel.addEventListener('click', function(e){
+    if(e.target.closest('a')) setOpen(false);
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && open){ setOpen(false); burger.focus(); }
+  });
+
+  // Rotating a phone, or a desktop window crossing the breakpoint, would
+  // otherwise leave the body scroll-locked with the panel invisible.
+  window.addEventListener('resize', function(){
+    if(open && window.innerWidth > 860) setOpen(false);
+  });
+})();
 
 /* reveal on scroll: one-shot, no parallax, no scroll-jacking */
 (function(){

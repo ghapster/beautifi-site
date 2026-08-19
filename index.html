@@ -93,15 +93,16 @@ header.nav{position:sticky;top:0;z-index:60;background:rgba(247,244,236,.86);bac
 /* The one nav item that leaves the site. The live dot marks it as a running
    thing rather than another anchor, and it carries the pass colour so it reads
    as "something is happening" without shouting over the sponsor button. */
-.nav-links a.nav-live{display:inline-flex;align-items:center;gap:7px;color:var(--ink-2)}
+.nav-links a.nav-live{display:inline-flex;align-items:center;color:var(--ink-2)}
 .nav-links a.nav-live:hover{color:var(--ink)}
 /* Two animations rather than one: the dot itself breathes, and a ring travels
    out from under it. A ring alone was too easy to miss at 7px. */
-.nav-live-dot{
+.live-dot{
+  display:inline-block;vertical-align:middle;margin-right:8px;
   position:relative;width:8px;height:8px;border-radius:50%;flex:0 0 auto;
   background:#2F6B4F;animation:navLiveDot 1.8s ease-in-out infinite;
 }
-.nav-live-dot:after{
+.live-dot:after{
   content:"";position:absolute;inset:0;border-radius:50%;
   background:#2F6B4F;animation:navLiveRing 1.8s ease-out infinite;
 }
@@ -498,7 +499,7 @@ footer{
       <a href="#sponsors">For sponsors</a>
       <a href="#record">The record</a>
       <a class="nav-live" href="https://beautifi-demo.onrender.com/feed.html" target="_blank" rel="noopener">
-        <span class="nav-live-dot"></span>See it running
+        <span class="live-dot"></span>See it running
       </a>
       <a href="#docs">Docs</a>
     </nav>
@@ -738,7 +739,7 @@ footer{
         <h2 class="reveal">Every hour lands here, <span class="it">as it happens</span>.</h2>
       </div>
       <a class="btn btn-g reveal" href="https://beautifi-demo.onrender.com/feed.html" target="_blank" rel="noopener">
-        <span class="dot pulse" style="width:8px;height:8px;border-radius:50%;background:currentColor;display:inline-block;margin-right:9px;vertical-align:middle"></span>See it running ↗
+        <span class="live-dot"></span>See it running ↗
       </a>
     </div>
 

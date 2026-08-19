@@ -391,6 +391,13 @@ footer a{color:var(--gold-lt);text-decoration:none}
   .step:hover{transform:translateY(-2px);box-shadow:0 16px 34px -26px rgba(30,58,52,.45)}
 }
 
+.owner-cta{grid-column:1 / -1;margin-top:34px}
+.owner-cta a{display:inline-flex;align-items:center;gap:9px;text-decoration:none;
+  font-size:16px;font-weight:600;color:var(--ink-2)}
+.owner-cta a:hover{color:var(--ink)}
+.owner-cta .dot{width:8px;height:8px;border-radius:50%;background:#2F6B4F;flex:none}
+.owner-cta-note{display:block;margin-top:7px;font-size:14px;color:var(--muted);max-width:52ch}
+
 /* ============ section transitions ============
    The page came out of a slide deck: flat panels butted together with a rule
    along the join. A transition STRADDLES the join, so the block above starts
@@ -602,6 +609,14 @@ footer{
       <li><span class="tick"></span>They pay for the electricity.</li>
       <li><span class="tick"></span>They run it every single day.</li>
     </ul>
+
+    <p class="owner-cta reveal">
+      <a href="https://beautifi-demo.onrender.com/facility.html" target="_blank" rel="noopener">
+        <span class="dot pulse"></span>See what a salon sees &#8599;
+      </a>
+      <span class="owner-cta-note">Their hours, what they have earned, and the equipment running it.
+      A demonstration: the salons and figures are generated.</span>
+    </p>
   </div>
 </section>
 

@@ -100,6 +100,33 @@ header.nav{position:sticky;top:0;z-index:60;background:rgba(247,244,236,.86);bac
 .hero{background:var(--ink);color:var(--paper-4);padding:132px 0 118px;position:relative;overflow:hidden}
 .hero:after{content:"";position:absolute;inset:auto -10% -60% 40%;height:70%;background:radial-gradient(ellipse at center,rgba(194,145,58,.16),transparent 65%);pointer-events:none}
 .hero h1{max-width:15ch;position:relative}
+
+/* Hero is two columns from tablet up: copy left, the vent image right. Below
+   that it stacks, with the image first so the page still opens on something
+   rather than on a wall of text. */
+.hero-grid{display:grid;gap:52px;align-items:center;position:relative}
+.hero-copy{min-width:0}
+.hero-art{margin:0;position:relative}
+.hero-art img{
+  display:block;width:100%;height:auto;border-radius:18px;
+  /* The artwork is already in the palette, so it only needs seating into the
+     dark panel rather than recolouring: a soft edge and a little depth. */
+  box-shadow:0 26px 60px -30px rgba(0,0,0,.75), 0 0 0 1px rgba(239,239,231,.10);
+}
+/* The gold wash behind the hero sits under the image, not over it. */
+.hero-art:before{
+  content:"";position:absolute;inset:-9% -7% -12% -9%;border-radius:26px;
+  background:radial-gradient(ellipse at 60% 45%,rgba(217,183,101,.20),transparent 68%);
+  pointer-events:none;z-index:-1;
+}
+@media (min-width:900px){
+  .hero-grid{grid-template-columns:1.08fr .92fr;gap:60px}
+  .hero h1{max-width:none}
+}
+@media (max-width:899px){
+  .hero-grid{grid-template-columns:1fr}
+  .hero-art{order:-1;max-width:420px}
+}
 .hero .lede{color:#B9C9C0;margin-top:26px;max-width:52ch;position:relative}
 .hero-cta{display:flex;flex-wrap:wrap;gap:14px;margin-top:38px;position:relative}
 .hero .btn-g{border-color:rgba(239,239,231,.3);color:var(--paper-4)}
@@ -444,7 +471,8 @@ footer{
 
 <!-- ============ HERO ============ -->
 <div class="hero" id="top">
-  <div class="wrap">
+  <div class="wrap hero-grid">
+   <div class="hero-copy">
     <div class="eyebrow reveal"><span class="eyebrow-txt">Verified mitigation work, settled at the source</span></div>
     <h1 class="reveal">Clean air is work.<br>Now it's <span class="it">recorded</span>, and rewarded.</h1>
     <p class="lede reveal">Nail salons run source-capture ventilation all day, at their own cost. BeautiFi records that work as it happens, verifies it against physics, and turns it into audit-ready proof that sponsors can fund.</p>
@@ -452,6 +480,10 @@ footer{
       <a class="btn btn-p" href="#start">Become a sponsor</a>
       <a class="btn btn-g" href="#record">See the live record</a>
     </div>
+   </div>
+   <figure class="hero-art reveal">
+     <img src="hero-vent.jpg" width="920" height="920" alt="A technician's hands resting against a source-capture ventilation grille." loading="eager">
+   </figure>
   </div>
 </div>
 

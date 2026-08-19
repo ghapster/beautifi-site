@@ -290,99 +290,121 @@ footer a{color:var(--gold-lt);text-decoration:none}
 
 /* ============ section transitions ============
    The page came out of a slide deck: flat panels butted together with a rule
-   along the join. Two earlier attempts softened the edge without fixing it,
-   because both kept the blend on one side of the boundary only. The section
-   above stayed flat right up to its last pixel and the change began at the
-   join, so the eye still found the seam.
+   along the join. A transition STRADDLES the join, so the block above starts
+   giving way before it ends and the block below finishes the change, both
+   meeting at --seam on the boundary. Neither the colour nor the rate it
+   changes steps, which is what stops the eye finding the seam.
 
-   A transition now STRADDLES the join. The block above starts giving way
-   before it ends, the block below finishes the change, and both meet at the
-   same mid colour on the boundary, so there is no step in the colour or in
-   the rate it changes.
+   The ramps stay long, but their stops are weighted so the colour ARRIVES
+   EARLY: about 75% of the change happens in the first third of the ramp, and
+   the rest is a tail so slight it is indistinguishable from flat. That is what
+   lets the padding stay tight. An even ramp has to be cleared entirely by the
+   padding or text sits on a visible gradient, which is what pushed every
+   section so far down the page; a weighted one only has to clear its steep
+   part, and the tail can run underneath the first line of text unnoticed.
 
-   The distances are deliberately long. Between the paper and the dark panel
-   the change runs about 370px, roughly a third of a screen: at 130px a fade
-   still reads as a band of smear sitting on the seam, and the only way to
-   stop it reading as an object is to make it too gradual to locate.
-
-   --seam is the meeting colour, a desaturated sage sitting between the paper
-   and the ink. Both sides interpolate to it rather than to each other, which
-   keeps the blend out of the muddy greys a direct paper-to-ink fade passes
-   through.
-
-   Ramps are background layers sized to their depth over the section's own
-   background-color, so only the ends are gradients. Every ramp sits inside
-   the padding, so no text lands on a blend. */
+   --seam, a desaturated sage, is the meeting colour. Both sides interpolate to
+   it rather than to each other, which keeps the blend out of the muddy greys a
+   direct paper-to-ink fade passes through. */
 .seamed{position:relative}
 
 :root{--seam:#8B9791}
 
-/* --- into and out of a dark block ------------------------------- */
-.x-top-ink{                       /* paper block coming out from under one */
+/* paper block coming out from under a dark one: steep first, then a tail */
+.x-top-ink{
   background-color:var(--paper);
-  background-image:linear-gradient(180deg,var(--seam),var(--paper));
-  background-size:100% 170px;background-position:top;background-repeat:no-repeat;
-  padding-top:196px;
+  background-image:linear-gradient(180deg,
+    var(--seam) 0,
+    rgb(198,202,195) 30%,
+    rgb(231,230,222) 55%,
+    rgb(243,241,233) 75%,
+    var(--paper) 100%);
+  background-size:100% 200px;background-position:top;background-repeat:no-repeat;
+  padding-top:126px;
 }
+
+/* a block that ramps at both ends declares both layers together: stacking two
+   single-end classes does not work, the second background-image replaces the
+   first rather than adding to it */
+.x-tint-down{
+  background-color:var(--paper-3);
+  background-image:
+    linear-gradient(180deg,var(--paper),var(--paper-3)),
+    linear-gradient(180deg,
+      var(--paper-3) 0,
+      rgb(236,233,221) 30%,
+      rgb(209,211,204) 62%,
+      var(--seam) 100%);
+  background-size:100% 120px,100% 190px;
+  background-position:top,bottom;
+  background-repeat:no-repeat,no-repeat;
+  padding:112px 0 128px;
+}
+.x-flat-down{
+  background-color:var(--paper-3);
+  background-image:linear-gradient(180deg,
+    var(--paper-3) 0,
+    rgb(236,233,221) 30%,
+    rgb(209,211,204) 62%,
+    var(--seam) 100%);
+  background-size:100% 190px;background-position:bottom;background-repeat:no-repeat;
+  padding-bottom:128px;
+}
+
 .dark{
   color:var(--paper-4);
   background-color:var(--ink);
   background-image:
-    linear-gradient(180deg,var(--seam),var(--ink)),
-    linear-gradient(180deg,var(--ink),var(--seam));
-  background-size:100% 200px,100% 200px;
+    linear-gradient(180deg,
+      var(--seam) 0,
+      rgb(74,95,89) 32%,
+      rgb(46,72,66) 58%,
+      rgb(34,62,56) 78%,
+      var(--ink) 100%),
+    linear-gradient(180deg,
+      var(--ink) 0,
+      rgb(41,67,61) 30%,
+      rgb(68,91,85) 62%,
+      var(--seam) 100%);
+  background-size:100% 210px,100% 210px;
   background-position:top,bottom;
   background-repeat:no-repeat,no-repeat;
-  padding:236px 0;
+  padding:150px 0;
 }
 
-/* A block that ramps at BOTH ends declares both layers here. Stacking two
-   single-end classes on one element does not work: the second background-image
-   replaces the first rather than adding to it. */
-.x-tint-down{                     /* paper above, dark below */
-  background-color:var(--paper-3);
-  background-image:
-    linear-gradient(180deg,var(--paper),var(--paper-3)),
-    linear-gradient(180deg,var(--paper-3),var(--seam));
-  background-size:100% 150px,100% 170px;
-  background-position:top,bottom;
-  background-repeat:no-repeat,no-repeat;
-  padding:150px 0 196px;
-}
-.x-flat-down{                     /* already tinted above, dark below */
-  background-color:var(--paper-3);
-  background-image:linear-gradient(180deg,var(--paper-3),var(--seam));
-  background-size:100% 170px;background-position:bottom;background-repeat:no-repeat;
-  padding-bottom:196px;
-}
-
-/* --- between the two paper tones -------------------------------- */
-/* Only a few points apart, so these need far less room to disappear. */
+/* between the two paper tones: a few points apart, so barely any room needed */
 .x-tint{
   background-color:var(--paper-3);
   background-image:linear-gradient(180deg,var(--paper),var(--paper-3));
-  background-size:100% 150px;background-position:top;background-repeat:no-repeat;
-  padding-top:150px;
+  background-size:100% 120px;background-position:top;background-repeat:no-repeat;
 }
 .x-plain{
   background-color:var(--paper);
   background-image:linear-gradient(180deg,var(--paper-3),var(--paper));
-  background-size:100% 150px;background-position:top;background-repeat:no-repeat;
-  padding-top:150px;
+  background-size:100% 120px;background-position:top;background-repeat:no-repeat;
 }
 
-/* --- the two ends of the page ----------------------------------- */
+/* the two ends of the page */
 .hero{
-  padding:132px 0 210px;
+  padding:132px 0 146px;
   background-color:var(--ink);
-  background-image:linear-gradient(180deg,var(--ink),var(--seam));
+  background-image:linear-gradient(180deg,
+    var(--ink) 0,
+    rgb(41,67,61) 30%,
+    rgb(68,91,85) 62%,
+    var(--seam) 100%);
   background-size:100% 190px;background-position:bottom;background-repeat:no-repeat;
 }
 footer{
-  color:var(--paper-4);padding:236px 0 46px;
+  color:var(--paper-4);padding:150px 0 46px;
   background-color:var(--ink);
-  background-image:linear-gradient(180deg,var(--seam),var(--ink));
-  background-size:100% 200px;background-position:top;background-repeat:no-repeat;
+  background-image:linear-gradient(180deg,
+    var(--seam) 0,
+    rgb(74,95,89) 32%,
+    rgb(46,72,66) 58%,
+    rgb(34,62,56) 78%,
+    var(--ink) 100%);
+  background-size:100% 210px;background-position:top;background-repeat:no-repeat;
 }
 
 /* Reduced motion: no travel, no drift, no autonomous animation, but a plain

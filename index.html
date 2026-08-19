@@ -108,10 +108,13 @@ header.nav{position:sticky;top:0;z-index:60;background:rgba(247,244,236,.86);bac
 .hero-copy{min-width:0}
 .hero-art{margin:0;position:relative}
 .hero-art img{
-  display:block;width:100%;height:auto;border-radius:18px;
-  /* The artwork is already in the palette, so it only needs seating into the
-     dark panel rather than recolouring: a soft edge and a little depth. */
-  box-shadow:0 26px 60px -30px rgba(0,0,0,.75), 0 0 0 1px rgba(239,239,231,.10);
+  display:block;width:100%;height:auto;
+  /* The artwork's own background is (34,62,56) against the hero's (30,58,52),
+     so it is already the panel colour. Framing it in a rounded box with a
+     shadow would draw an edge around something that should merge instead, so
+     the edges are masked and it dissolves into the panel. */
+  -webkit-mask-image:radial-gradient(ellipse 74% 74% at 50% 50%,#000 52%,rgba(0,0,0,0) 88%);
+          mask-image:radial-gradient(ellipse 74% 74% at 50% 50%,#000 52%,rgba(0,0,0,0) 88%);
 }
 /* The gold wash behind the hero sits under the image, not over it. */
 .hero-art:before{

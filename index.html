@@ -290,12 +290,56 @@ footer a{color:var(--gold-lt);text-decoration:none}
   .step:hover{transform:translateY(-2px);box-shadow:0 16px 34px -26px rgba(30,58,52,.45)}
 }
 
-/* soft section seams instead of hard rules */
+/* ============ section transitions ============
+   The page came out of a slide deck, so each section was a flat fill butted
+   against the next: paper, then a tinted paper, then a dark panel, with a 1px
+   rule drawn along the join. Every boundary read as a ruled edge.
+
+   Instead each block now carries its neighbour's colour at the top and bottom
+   and ramps into its own, so the change happens across 100-150px of scroll
+   rather than on a single row of pixels. The ramps sit inside the section
+   padding, so no text ever lands on the blend.
+
+   Stops are eased rather than evenly spaced. A straight two-stop fade between
+   the dark panel and paper spends its middle in a flat grey, which reads as
+   haze; weighting the stops keeps most of the travel near the dark end. */
 .seamed{position:relative}
-.seamed:before,.seamed.seam-b:after{content:"";position:absolute;left:0;right:0;height:1px;
-  background:linear-gradient(90deg,transparent,var(--line) 22%,var(--line) 78%,transparent)}
-.seamed:before{top:0}
-.seamed.seam-b:after{bottom:0}
+
+/* tinted blocks: paper -> paper-3 -> paper */
+.tint{
+  background:linear-gradient(180deg,
+    var(--paper) 0,
+    var(--paper-3) 96px,
+    var(--paper-3) calc(100% - 96px),
+    var(--paper) 100%);
+}
+
+/* dark panel: paper -> ink -> paper, with room in the padding for the ramp */
+.dark{
+  background:linear-gradient(180deg,
+    var(--paper) 0,
+    #A8AFA4 34px,
+    var(--ink-3) 78px,
+    var(--ink) 140px,
+    var(--ink) calc(100% - 140px),
+    var(--ink-3) calc(100% - 78px),
+    #A8AFA4 calc(100% - 34px),
+    var(--paper) 100%);
+  padding:172px 0;
+}
+
+/* hero: ink, easing out to the paper the next section starts on */
+.hero{
+  /* bottom padding raised from 118px so the 140px ramp stays clear of the
+     buttons: the blend belongs in the whitespace, never under text */
+  padding:132px 0 176px;
+  background:linear-gradient(180deg,
+    var(--ink) 0,
+    var(--ink) calc(100% - 140px),
+    var(--ink-3) calc(100% - 78px),
+    #A8AFA4 calc(100% - 34px),
+    var(--paper) 100%);
+}
 
 /* Reduced motion: no travel, no drift, no autonomous animation, but a plain
    opacity fade stays, and the progress hairline tracks the user's own scroll. */
@@ -365,7 +409,7 @@ footer a{color:var(--gold-lt);text-decoration:none}
 </section>
 
 <!-- ============ WHAT CHANGED ============ -->
-<section class="seamed seam-b" style="background:var(--paper-3)">
+<section class="tint">
   <div class="wrap two">
     <div>
       <div class="eyebrow reveal"><span class="eyebrow-txt">What changed</span></div>
@@ -441,7 +485,7 @@ footer a{color:var(--gold-lt);text-decoration:none}
 </section>
 
 <!-- ============ FOR SPONSORS ============ -->
-<section id="sponsors" class="seamed seam-b" style="background:var(--paper-3)">
+<section id="sponsors" class="tint">
   <div class="wrap two">
     <div>
       <div class="eyebrow reveal"><span class="eyebrow-txt">For sponsors</span></div>
@@ -626,7 +670,7 @@ footer a{color:var(--gold-lt);text-decoration:none}
 </section>
 
 <!-- ============ DOCUMENTS ============ -->
-<section id="docs" class="seamed" style="background:var(--paper-3)">
+<section id="docs" class="tint">
   <div class="wrap">
     <div class="eyebrow reveal"><span class="eyebrow-txt">Documents</span></div>
     <h2 class="reveal">Read the protocol for yourself.</h2>
@@ -659,7 +703,7 @@ footer a{color:var(--gold-lt);text-decoration:none}
 </section>
 
 <!-- ============ GETTING STARTED ============ -->
-<section id="start" class="seamed" style="background:var(--paper-3)">
+<section id="start" class="tint">
   <div class="wrap">
     <div class="eyebrow reveal"><span class="eyebrow-txt">Getting started</span></div>
     <h2 class="reveal">Getting started is simple.</h2>

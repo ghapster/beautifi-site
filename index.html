@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>BeautiFi — Verified mitigation work, settled at the source</title>
+<title>BeautiFi: Verified mitigation work, settled at the source</title>
 <meta name="description" content="Salons run source-capture ventilation every day. BeautiFi records that work as it happens, verifies it, and turns it into audit-ready proof that sponsors can fund.">
 <link rel="canonical" href="https://beautifi.io/">
 <meta name="theme-color" content="#1E3A34">
@@ -14,19 +14,19 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="BeautiFi">
 <meta property="og:url" content="https://beautifi.io/">
-<meta property="og:title" content="BeautiFi — Verified mitigation work, settled at the source">
+<meta property="og:title" content="BeautiFi: Verified mitigation work, settled at the source">
 <meta property="og:description" content="Salons run source-capture ventilation every day, at their own cost. BeautiFi records that work as it happens, verifies it against physics, and turns it into audit-ready proof that sponsors can fund.">
 <meta property="og:image" content="https://beautifi.io/og-image.png">
 <meta property="og:image:type" content="image/png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="BeautiFi — Clean air is work. Now it's recorded and rewarded.">
+<meta property="og:image:alt" content="BeautiFi: Clean air is work. Now it's recorded and rewarded.">
 
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="BeautiFi — Verified mitigation work, settled at the source">
+<meta name="twitter:title" content="BeautiFi: Verified mitigation work, settled at the source">
 <meta name="twitter:description" content="Salons run source-capture ventilation every day. BeautiFi records it, verifies it against physics, and turns it into audit-ready proof that sponsors can fund.">
 <meta name="twitter:image" content="https://beautifi.io/og-image.png">
-<meta name="twitter:image:alt" content="BeautiFi — Clean air is work. Now it's recorded and rewarded.">
+<meta name="twitter:image:alt" content="BeautiFi: Clean air is work. Now it's recorded and rewarded.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,7 +34,7 @@
 
 <style>
 /* ============================================================
-   BeautiFi — tokens
+   BeautiFi tokens
    Bridges the deck's editorial palette with the product UI.
    ============================================================ */
 :root{
@@ -80,9 +80,11 @@ h3{font-family:var(--serif);font-weight:600;font-size:22px;line-height:1.25}
 header.nav{position:sticky;top:0;z-index:60;background:rgba(247,244,236,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line-2)}
 .nav-in{max-width:var(--wrap);margin:0 auto;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .brand{display:flex;align-items:center;gap:11px;text-decoration:none;color:inherit}
-.brand-mark{width:34px;height:34px;border-radius:9px;background:var(--ink);display:grid;place-items:center;flex:0 0 auto}
-.brand-mark span{display:block;width:17px;height:2px;background:var(--gold);border-radius:2px;box-shadow:0 5px 0 var(--paper-4)}
-.brand-name{font-family:var(--serif);font-weight:600;font-size:20px;letter-spacing:-.01em}
+/* Mark and wordmark are the same artwork the demo uses, so the two properties
+   read as one product. Shipped at 2x display size rather than the demo's
+   full-resolution originals. */
+.brand-mark{width:34px;height:34px;border-radius:9px;flex:0 0 auto;display:block}
+.brand-word{display:block;height:18px;width:auto}
 .brand-sub{font-family:var(--mono);font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted-2);margin-top:1px}
 .nav-links{display:flex;align-items:center;gap:26px}
 .nav-links a{font-size:15px;color:var(--muted);text-decoration:none;transition:color .2s}
@@ -252,20 +254,20 @@ footer a{color:var(--gold-lt);text-decoration:none}
 .doc .go:hover .arw{transform:translateX(4px)}
 @media(hover:hover){.doc:hover{transform:translateY(-2px);box-shadow:0 16px 34px -26px rgba(30,58,52,.45)}}
 
-/* ============ motion — restrained, and opt-out honoured ============ */
+/* ============ motion: restrained, and opt-out honoured ============ */
 
 /* scroll progress hairline */
 .progress{position:fixed;top:0;left:0;height:2px;width:0;z-index:80;
   background:linear-gradient(90deg,var(--gold-dk),var(--gold-lt));pointer-events:none}
 
-/* section entrances — copy rises, artifacts settle in with a touch of scale */
+/* section entrances: copy rises, artifacts settle in with a touch of scale */
 .js .reveal{opacity:0;transform:translateY(18px)}
 .js .reveal.in{opacity:1;transform:none;
   transition:opacity .72s cubic-bezier(.2,.6,.2,1),transform .72s cubic-bezier(.2,.6,.2,1)}
 .js .reveal.art{transform:translateY(26px) scale(.986)}
 .js .reveal.art.in{transform:none;transition-duration:.9s}
 
-/* ambient drift on the dark panels — very slow, easy to miss, which is the point */
+/* ambient drift on the dark panels: very slow, easy to miss, which is the point */
 .hero:after{animation:drift 30s ease-in-out infinite}
 .sp-hero:after,.pf-cover:after{animation:drift 34s ease-in-out infinite}
 @keyframes drift{0%,100%{transform:translate3d(0,0,0) scale(1)}
@@ -294,7 +296,7 @@ footer a{color:var(--gold-lt);text-decoration:none}
 .seamed:before{top:0}
 .seamed.seam-b:after{bottom:0}
 
-/* Reduced motion: no travel, no drift, no autonomous animation — but a plain
+/* Reduced motion: no travel, no drift, no autonomous animation, but a plain
    opacity fade stays, and the progress hairline tracks the user's own scroll. */
 @media(prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
@@ -312,9 +314,9 @@ footer a{color:var(--gold-lt);text-decoration:none}
 <header class="nav">
   <div class="nav-in">
     <a class="brand" href="#top">
-      <span class="brand-mark"><span></span></span>
+      <img class="brand-mark" src="logo-mark.png" alt="" width="34" height="34">
       <span>
-        <span class="brand-name">BeautiFi</span>
+        <img class="brand-word" src="logo-wordmark.png" alt="BeautiFi" width="166" height="36">
         <span class="brand-sub">Secured by DUSN</span>
       </span>
     </a>
@@ -333,7 +335,7 @@ footer a{color:var(--gold-lt);text-decoration:none}
 <div class="hero" id="top">
   <div class="wrap">
     <div class="eyebrow reveal"><span class="rule"></span><span class="eyebrow-txt">Verified mitigation work, settled at the source</span></div>
-    <h1 class="reveal">Clean air is work.<br>Now it's <span class="it">recorded</span> — and rewarded.</h1>
+    <h1 class="reveal">Clean air is work.<br>Now it's <span class="it">recorded</span>, and rewarded.</h1>
     <p class="lede reveal">Nail salons run source-capture ventilation all day, at their own cost. BeautiFi records that work as it happens, verifies it against physics, and turns it into audit-ready proof that sponsors can fund.</p>
     <div class="hero-cta reveal">
       <a class="btn btn-p" href="#start">Become a sponsor</a>
@@ -349,7 +351,7 @@ footer a{color:var(--gold-lt);text-decoration:none}
       <div class="eyebrow reveal"><span class="rule"></span><span class="eyebrow-txt">Who keeps the air clean</span></div>
       <h2 class="reveal">The people keeping salon air clean are the owners themselves.</h2>
       <p class="lede reveal" style="margin-top:24px">There's a lot of talk about clean air and doing good. But in a salon it's real work, and it falls on one person.</p>
-      <p class="lede reveal" style="margin-top:18px">For a long time nobody could help — not because they didn't care, but because there was no way to know it was happening. <strong style="color:var(--ink-2)">That's what BeautiFi changes.</strong></p>
+      <p class="lede reveal" style="margin-top:18px">For a long time nobody could help. Not because they didn't care, but because there was no way to know it was happening. <strong style="color:var(--ink-2)">That's what BeautiFi changes.</strong></p>
     </div>
     <ul class="burden reveal">
       <li><span class="tick"></span>They buy the ventilation.</li>
@@ -366,9 +368,9 @@ footer a{color:var(--gold-lt);text-decoration:none}
   <div class="wrap two">
     <div>
       <div class="eyebrow reveal"><span class="rule"></span><span class="eyebrow-txt">What changed</span></div>
-      <h2 class="reveal">Running ventilation isn't just a cost — <span class="it">now every hour counts</span>.</h2>
+      <h2 class="reveal">Running ventilation isn't just a cost. <span class="it">Now every hour counts</span>.</h2>
       <p class="lede reveal" style="margin-top:24px">You don't have to change a thing. You already own the ventilation and use it every day. BeautiFi simply records what you already do, and checks it.</p>
-      <p class="lede reveal" style="margin-top:18px">Each hour that passes its checks becomes a <strong style="color:var(--ink-2)">Verified Mitigation Hour</strong> — a public, sealed record of source-capture operation that anyone can open and re-check.</p>
+      <p class="lede reveal" style="margin-top:18px">Each hour that passes its checks becomes a <strong style="color:var(--ink-2)">Verified Mitigation Hour</strong>: a public, sealed record of source-capture operation that anyone can open and re-check.</p>
     </div>
 
     <!-- real work card + proof tree -->
@@ -379,7 +381,7 @@ footer a{color:var(--gold-lt);text-decoration:none}
           <div class="wc-body">
             <div class="wc-id"><span class="wc-name">Bloom Beauty</span><span class="wc-loc">Nashville, TN</span></div>
             <div class="wc-sum">1 Verified Mitigation Hour of source-capture operation</div>
-            <div class="wc-when">Aug 7, 2026 &nbsp;|&nbsp; 10:15:46 AM — 11:15:46 AM</div>
+            <div class="wc-when">Aug 7, 2026 &nbsp;|&nbsp; 10:15:46 AM to 11:15:46 AM</div>
           </div>
           <span class="wc-time">4m ago</span>
         </div>
@@ -429,7 +431,7 @@ footer a{color:var(--gold-lt);text-decoration:none}
     <div class="eyebrow reveal"><span class="rule"></span><span class="eyebrow-txt">How it works</span></div>
     <h2 class="reveal">Three steps, start to finish.</h2>
     <div class="three">
-      <div class="step reveal"><div class="n">Operate</div><h3>The salon runs its ventilation.</h3><p>Sensors record each hour as it happens — not from a form filled out later.</p></div>
+      <div class="step reveal"><div class="n">Operate</div><h3>The salon runs its ventilation.</h3><p>Sensors record each hour as it happens, not from a form filled out later.</p></div>
       <div class="step reveal"><div class="n">Verify</div><h3>Each hour is checked.</h3><p>Five validation events per hour, tested against airflow physics, then sealed into a public record that can't be edited.</p></div>
       <div class="step reveal"><div class="n">Settle</div><h3>The salon is rewarded.</h3><p>Sponsors retire verified hours, and that support goes straight to the operators who earned them.</p></div>
     </div>
@@ -443,7 +445,7 @@ footer a{color:var(--gold-lt);text-decoration:none}
     <div>
       <div class="eyebrow reveal"><span class="rule"></span><span class="eyebrow-txt">For sponsors</span></div>
       <h2 class="reveal">Most claims ask to be believed. <span class="it">This one can be checked.</span></h2>
-      <p class="lede reveal" style="margin-top:24px">Your sponsorship retires verified mitigation hours from the public pool. Once they're retired, no one else can claim them — and your name is on the settlement.</p>
+      <p class="lede reveal" style="margin-top:24px">Your sponsorship retires verified mitigation hours from the public pool. Once they're retired, no one else can claim them, and your name is on the settlement.</p>
       <p class="lede reveal" style="margin-top:18px">Behind it sits the proof. Every hour is methodology-pinned and evidence-linked, open to independent reproduction. <strong style="color:var(--ink-2)">Your claim is never just your word.</strong></p>
     </div>
 
@@ -478,11 +480,11 @@ footer a{color:var(--gold-lt);text-decoration:none}
 <section id="name">
   <div class="wrap">
     <div class="eyebrow reveal"><span class="rule"></span><span class="eyebrow-txt">Your name goes on</span></div>
-    <h2 class="reveal" style="max-width:26ch">Recognition you can point at — <span class="it">and anyone can check</span>.</h2>
+    <h2 class="reveal" style="max-width:26ch">Recognition you can point at, <span class="it">and anyone can check</span>.</h2>
     <p class="lede reveal" style="margin-top:22px;max-width:62ch">Sponsorship isn't a line item that disappears into a report. Your support becomes a public page with your name on it, a badge you can put anywhere, and a branded entry in the feed every time you settle.</p>
 
     <div class="surfaces">
-      <!-- surface 1 — the public profile -->
+      <!-- surface 1: the public profile -->
       <div class="reveal">
         <div class="surf-cap">1 · Your public page</div>
         <div class="browser">
@@ -509,10 +511,10 @@ footer a{color:var(--gold-lt);text-decoration:none}
             <a class="btn-sm" href="#record">Verify this record</a>
           </div>
         </div>
-        <p class="mono-note" style="margin-top:12px">A real URL you can send to anyone — press, partners, your board.</p>
+        <p class="mono-note" style="margin-top:12px">A real URL you can send to anyone: press, partners, your board.</p>
       </div>
 
-      <!-- surface 2 — the portable badge -->
+      <!-- surface 2: the portable badge -->
       <div class="reveal">
         <div class="surf-cap">2 · A badge you can embed</div>
         <div class="badge">
@@ -534,14 +536,14 @@ footer a{color:var(--gold-lt);text-decoration:none}
           <div class="snippet-top"><span>Embed code</span><button class="copy" type="button" id="copyBadge">Copy</button></div>
           <pre><code id="badgeSnippet">&lt;a href="https://beautifi.io/sponsor/lumio-beauty"&gt;
   &lt;img src="https://beautifi.io/badge/lumio-beauty.svg"
-       alt="Lumio Beauty Co. — 2,480 Verified
+       alt="Lumio Beauty Co., 2,480 Verified
             Mitigation Hours retired"&gt;
 &lt;/a&gt;</code></pre>
         </div>
         <p class="mono-note" style="margin-top:12px">One line into an ESG report, a site footer, a pitch deck. The badge stays current, and it links back to the live record.</p>
 
         <div class="surf-cap" style="margin-top:30px">3 · In the public feed</div>
-        <p style="font-size:15.5px;color:var(--muted);line-height:1.55">Every settlement posts a branded card into the timeline above — your logo and name carried alongside the work you paid for, seen by everyone reading the record.</p>
+        <p style="font-size:15.5px;color:var(--muted);line-height:1.55">Every settlement posts a branded card into the timeline above, with your logo and name carried alongside the work you paid for, seen by everyone reading the record.</p>
       </div>
     </div>
   </div>
@@ -555,10 +557,8 @@ footer a{color:var(--gold-lt);text-decoration:none}
         <div class="eyebrow reveal"><span class="rule"></span><span class="eyebrow-txt">The public record</span></div>
         <h2 class="reveal">Every hour lands here, <span class="it">as it happens</span>.</h2>
       </div>
-      <a class="demo-tag reveal" id="recordTag" href="https://beautifi-demo.onrender.com/feed.html" target="_blank" rel="noopener" style="text-decoration:none">
-        <span class="dot pulse" style="width:7px;height:7px;border-radius:50%;background:currentColor"></span>
-        <span id="recordTagTxt">Live demo network</span>
-        <span style="opacity:.6">↗</span>
+      <a class="btn btn-g reveal" href="https://beautifi-demo.onrender.com/feed.html" target="_blank" rel="noopener">
+        <span class="dot pulse" style="width:8px;height:8px;border-radius:50%;background:currentColor;display:inline-block;margin-right:9px;vertical-align:middle"></span>See it running ↗
       </a>
     </div>
 
@@ -577,7 +577,7 @@ footer a{color:var(--gold-lt);text-decoration:none}
               <div class="wc-body">
                 <div class="wc-id"><span class="wc-name">The Salon</span><span class="wc-loc">Chicago, IL</span></div>
                 <div class="wc-sum">1 Verified Mitigation Hour of source-capture operation</div>
-                <div class="wc-when">Aug 7, 2026 &nbsp;|&nbsp; 09:56:46 AM — 10:56:46 AM</div>
+                <div class="wc-when">Aug 7, 2026 &nbsp;|&nbsp; 09:56:46 AM to 10:56:46 AM</div>
               </div>
               <span class="wc-time">23m ago</span>
             </div>
@@ -611,7 +611,7 @@ footer a{color:var(--gold-lt);text-decoration:none}
               <div class="wc-body">
                 <div class="wc-id"><span class="wc-name">Luminary</span><span class="wc-loc">Oakland, CA</span></div>
                 <div class="wc-sum">1 Verified Mitigation Hour of source-capture operation</div>
-                <div class="wc-when">Aug 7, 2026 &nbsp;|&nbsp; 09:10:46 AM — 10:10:46 AM</div>
+                <div class="wc-when">Aug 7, 2026 &nbsp;|&nbsp; 09:10:46 AM to 10:10:46 AM</div>
               </div>
               <span class="wc-time">1h ago</span>
             </div>
@@ -620,10 +620,7 @@ footer a{color:var(--gold-lt);text-decoration:none}
         </div>
       </div>
     </div>
-    <p class="mono-note reveal" style="margin-top:18px" id="recordNote">Entries above are pulled live from the running demonstration network, where salon activity is simulated. The protocol, the checks and the record are real.</p>
-    <p class="reveal" style="margin-top:18px">
-      <a class="btn btn-g" href="https://beautifi-demo.onrender.com/feed.html" target="_blank" rel="noopener">Open the live record ↗</a>
-    </p>
+    <p class="mono-note reveal" style="margin-top:18px">Representative entries. The network is running now, with hours being checked and settled as you read this: open it above to watch the real record.</p>
   </div>
 </section>
 
@@ -632,14 +629,14 @@ footer a{color:var(--gold-lt);text-decoration:none}
   <div class="wrap">
     <div class="eyebrow reveal"><span class="rule"></span><span class="eyebrow-txt">Documents</span></div>
     <h2 class="reveal">Read the protocol for yourself.</h2>
-    <p class="lede reveal" style="margin-top:22px;max-width:64ch">BeautiFi settles on the <strong style="color:var(--ink-2)">Deterministic Utility Settlement Network (DUSN)</strong> — the protocol beneath it, where every epoch, every retirement, and every proof artifact is methodology-pinned, evidence-linked, and counted only once.</p>
+    <p class="lede reveal" style="margin-top:22px;max-width:64ch">BeautiFi settles on the <strong style="color:var(--ink-2)">Deterministic Utility Settlement Network (DUSN)</strong>: the protocol beneath it, where every epoch, every retirement, and every proof artifact is methodology-pinned, evidence-linked, and counted only once.</p>
     <p class="lede reveal" style="margin-top:16px;max-width:60ch">The overview is public. The whitepaper and pitch deck are shared by request with qualified partners.</p>
 
     <div class="docs">
       <div class="doc reveal">
         <div class="doc-tag">Overview · Public</div>
         <h3>A Beautiful Vision</h3>
-        <p>Our first deployment, BeautiFi v1, equips beauty salons with ventilation and air-quality sensors, proves the clean-air work they do, and lets brands and ESG funds directly fund and retire that work with cryptographic proof. The long-term goal is shared infrastructure for many mitigation verticals — schools, homes, industry, water — so ESG capital flows straight to the people and places actually reducing exposure.</p>
+        <p>Our first deployment, BeautiFi v1, equips beauty salons with ventilation and air-quality sensors, proves the clean-air work they do, and lets brands and ESG funds directly fund and retire that work with cryptographic proof. The long-term goal is shared infrastructure for many mitigation verticals such as schools, homes, industry and water, so ESG capital flows straight to the people and places actually reducing exposure.</p>
         <a class="go" href="https://docs.google.com/document/d/e/2PACX-1vSwy78NWsYF8hIRRoDu_ySGhIdswkE3zwuxMQ69gUp30u58Rnr2_VdCsIY-13ldN4Ol-edafpQ0wwN0/pub" target="_blank" rel="noopener">Read <span class="arw">→</span></a>
       </div>
 
@@ -666,9 +663,9 @@ footer a{color:var(--gold-lt);text-decoration:none}
     <div class="eyebrow reveal"><span class="rule"></span><span class="eyebrow-txt">Getting started</span></div>
     <h2 class="reveal">Getting started is simple.</h2>
     <div class="three">
-      <div class="step reveal"><div class="n">Choose</div><h3>Pick your reach.</h3><p>Decide how much to support, and where — a region, a set of salons, or the whole network.</p></div>
+      <div class="step reveal"><div class="n">Choose</div><h3>Pick your reach.</h3><p>Decide how much to support, and where: a region, a set of salons, or the whole network.</p></div>
       <div class="step reveal"><div class="n">Support</div><h3>Your name goes on.</h3><p>Your support is matched to real recorded hours, and your public settlement record goes live.</p></div>
-      <div class="step reveal"><div class="n">Show</div><h3>Share it anywhere.</h3><p>Put it in front of anyone — and they can check for themselves that it's real.</p></div>
+      <div class="step reveal"><div class="n">Show</div><h3>Share it anywhere.</h3><p>Put it in front of anyone, and they can check for themselves that it's real.</p></div>
     </div>
     <p class="mono-note reveal" style="margin-top:30px">Support by card or by stablecoin. BeautiFi never holds your money; it settles straight to the operators who earned it.</p>
   </div>
@@ -694,7 +691,7 @@ footer a{color:var(--gold-lt);text-decoration:none}
 <script>
 document.documentElement.classList.add('js');
 
-/* reveal on scroll — one-shot, no parallax, no scroll-jacking */
+/* reveal on scroll: one-shot, no parallax, no scroll-jacking */
 (function(){
   var els = document.querySelectorAll('.reveal');
   if(!('IntersectionObserver' in window)){
@@ -715,7 +712,7 @@ document.documentElement.classList.add('js');
   els.forEach(function(e){io.observe(e)});
 })();
 
-/* live record — a new entry arrives only while the panel is on screen */
+/* live record: a new entry arrives only while the panel is on screen */
 (function(){
   var shell = document.getElementById('liveShell'),
       list  = document.getElementById('liveList'),
@@ -739,7 +736,7 @@ document.documentElement.classList.add('js');
     function t(x){var h=x.getHours(),m=x.getMinutes(),s=x.getSeconds(),ap=h>=12?'PM':'AM',hh=h%12||12;
       return pad(hh)+':'+pad(m)+':'+pad(s)+' '+ap}
     var dt = d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-    return dt+' &nbsp;|&nbsp; '+t(e)+' — '+t(d);
+    return dt+' &nbsp;|&nbsp; '+t(e)+' to '+t(d);
   }
 
   var sponsors = [
@@ -861,7 +858,7 @@ document.documentElement.classList.add('js');
   Array.prototype.forEach.call(nums, function(n){ n.textContent = '0'; io.observe(n); });
 })();
 
-/* copy the embed snippet — clipboard API where allowed, execCommand on file:// */
+/* copy the embed snippet: clipboard API where allowed, execCommand on file:// */
 (function(){
   var btn = document.getElementById('copyBadge'),
       src = document.getElementById('badgeSnippet');
@@ -894,166 +891,6 @@ document.documentElement.classList.add('js');
   }
 })();
 
-/* ============================================================
-   THE LIVE RECORD — real entries from the running network
-   ============================================================
-   The cards in the markup are a fallback, not the content. If the network is
-   unreachable — Render restarting, someone offline, the page opened from a
-   file — they stay exactly as they are and the section still reads correctly.
-   They are only replaced once real data is actually in hand.
-
-   Read-only, no key: these are the same public views the demo's own feed page
-   uses, opened for cross-origin reads on GET.
-   ============================================================ */
-(function(){
-  var API  = 'https://beautifi-demo.onrender.com';
-  var LIST = document.getElementById('liveList');
-  var CNT  = document.getElementById('entryCount');
-  if(!LIST) return;
-
-  function esc(t){
-    return String(t == null ? '' : t)
-      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
-      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
-  }
-
-  /* The demo derives a salon from the trailing digits of the device id, and
-     the same mapping is repeated here so a salon reads the same in both
-     places. Keep the two lists in step if either changes. */
-  var CITIES = ['Boston, MA','Portland, OR','Austin, TX','Chicago, IL','Miami, FL',
-                'Seattle, WA','Denver, CO','Nashville, TN','Brooklyn, NY','Oakland, CA'];
-  var NAMES  = ['Glow Studio','Nail Bar','Beauty Lab','The Salon','Luxe Nails',
-                'Studio 9','Pure Nails','Bloom Beauty','The Nail Room','Luminary'];
-
-  function salon(device){
-    var m = String(device||'').match(/(\d+)$/);
-    var n = m ? parseInt(m[1],10) : 1;
-    var name = NAMES[n % NAMES.length];
-    return {
-      name: name,
-      loc:  CITIES[n % CITIES.length],
-      mark: name.split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase()
-    };
-  }
-
-  function ago(ts){
-    var mins = Math.round((Date.now() - new Date(ts).getTime()) / 60000);
-    if(!isFinite(mins) || mins < 1) return 'just now';
-    if(mins < 60) return mins + 'm ago';
-    var h = Math.round(mins/60);
-    return h < 24 ? h + 'h ago' : Math.round(h/24) + 'd ago';
-  }
-
-  function window_(e){
-    var d = new Date(e.timestamp);
-    if(isNaN(d)) return '';
-    var day  = d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
-    var from = d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-    var to   = new Date(d.getTime()+3600000).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-    return day + ' &nbsp;|&nbsp; ' + from + ' — ' + to;
-  }
-
-  function workCard(e){
-    var s = salon(e.device_id);
-    var failed = e.event_type === 'EPOCH_FAILED';
-    var summary = failed
-      ? 'Hour rejected — did not meet the checks'
-      : '1 Verified Mitigation Hour of source-capture operation';
-    return '' +
-      '<div class="card-art"><div class="wc">' +
-        '<div class="wc-row">' +
-          '<div class="wc-node">' + esc(s.mark) + '</div>' +
-          '<div class="wc-body">' +
-            '<div class="wc-id"><span class="wc-name">' + esc(s.name) + '</span>' +
-              '<span class="wc-loc">' + esc(s.loc) + '</span></div>' +
-            '<div class="wc-sum">' + esc(summary) + '</div>' +
-            '<div class="wc-when">' + window_(e) + '</div>' +
-          '</div>' +
-          '<span class="wc-time">' + esc(ago(e.timestamp)) + '</span>' +
-        '</div>' +
-        '<div class="wc-acts"><span class="a">👏 ' + (e.applauds || 0) + '</span>' +
-          '<span class="sep"></span><span class="a">Share ↗</span>' +
-          '<span class="sep"></span><span class="a">Proof ↗</span>' +
-          '<span class="more">Details ▾</span></div>' +
-      '</div></div>';
-  }
-
-  function sponsorCard(e){
-    var name = e.sponsor_name || e.sponsor_id || 'Sponsor';
-    return '' +
-      '<div class="sp"><div class="sp-hero" style="padding:20px 22px">' +
-        '<span class="sp-pill"><span class="dot" style="background:var(--sage-lt)"></span>VMH Retired</span>' +
-        '<div class="sp-brand">' +
-          '<div class="sp-logo" style="width:40px;height:40px;font-size:18px">' + esc(name.charAt(0).toUpperCase()) + '</div>' +
-          '<div><div class="sp-name" style="font-size:21px">' + esc(name) + '</div>' +
-            '<div class="sp-sub">Verified mitigation work · funded at the source</div></div>' +
-        '</div>' +
-        '<div class="sp-claim" style="margin-top:15px;padding:12px 14px">' +
-          '<div class="sp-check" style="width:26px;height:26px;font-size:13px">✓</div>' +
-          '<div><div class="sp-claim-h" style="font-size:14.5px"><b>1 Verified Mitigation Hour</b> retired from the public pool</div></div>' +
-        '</div>' +
-      '</div>' +
-      '<div class="sp-foot" style="padding:11px 18px">' +
-        '<span class="chip">↲ Methodology v0.1.0</span>' +
-        '<span class="when">' + esc(ago(e.retired_at || e.timestamp)) + '</span>' +
-      '</div></div>';
-  }
-
-  function paint(entries, total){
-    var html = entries.map(function(e){
-      return e.event_type === 'VMH_RETIRED' ? sponsorCard(e) : workCard(e);
-    }).join('');
-    if(!html) return;                 /* nothing usable — keep the fallback */
-    LIST.innerHTML = html;
-    if(CNT && total) CNT.textContent = total.toLocaleString();
-  }
-
-  function load(){
-    /* Settlements come from their own endpoint, not from the feed. A retirement
-       updates the minted hour's entry in place, so it keeps that hour's
-       timestamp and never appears among the newest entries — filtering the feed
-       for one returns nothing. */
-    Promise.all([
-      fetch(API + '/api/feed?limit=20', { cache:'no-store' })
-        .then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); }),
-      fetch(API + '/api/settlements/recent?limit=1', { cache:'no-store' })
-        .then(function(r){ return r.ok ? r.json() : { settlements:[] }; })
-        .catch(function(){ return { settlements:[] }; })
-    ]).then(function(res){
-      var feed = res[0], settled = res[1];
-
-      /* One card per salon. The busiest salons post several hours in a row, and
-         the same name twice running looks like a rendering fault rather than a
-         busy salon. */
-      var seen = {}, passed = [], rejected = [];
-      (feed.entries || []).forEach(function(e){
-        if(e.event_type === 'VMH_RETIRED') return;
-        var s = salon(e.device_id).name;
-        if(seen[s]) return;
-        seen[s] = 1;
-        (e.event_type === 'EPOCH_FAILED' ? rejected : passed).push(e);
-      });
-
-      /* Show at most one rejected hour. Roughly one hour in eight is rejected,
-         but this is a sample of three — and an unlucky draw where two of them
-         failed reads as a network that mostly doesn't work. One rejection is
-         honest and is worth showing: it is the evidence the checks bite. */
-      var work = passed.concat(rejected.slice(0,1));
-      if(rejected.length && passed.length >= 2){
-        work = [passed[0], rejected[0]].concat(passed.slice(1));
-      }
-
-      /* A settlement between the hours, so the section shows both halves of
-         what the network does rather than a wall of identical entries. */
-      var spon = (settled.settlements || []).slice(0,1);
-      var mix  = work.slice(0,1).concat(spon, work.slice(1,3));
-      paint(mix.filter(Boolean), feed.total);
-    }).catch(function(){ /* leave the fallback cards in place */ });
-  }
-
-  load();
-  setInterval(load, 20000);
-})();
 
 </script>
 </body>

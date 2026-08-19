@@ -60,7 +60,6 @@ img{max-width:100%;display:block}
 
 .wrap{max-width:var(--wrap);margin:0 auto;padding:0 32px}
 section{padding:112px 0}
-.dark{color:var(--paper-4)}
 .dark .eyebrow-txt{color:var(--gold-lt)}
 .dark h2{color:var(--paper-4)}
 .dark .lede,.dark p{color:#B9C9C0}
@@ -182,10 +181,6 @@ header.nav{position:sticky;top:0;z-index:60;background:rgba(247,244,236,.86);bac
 .demo-tag{display:inline-flex;align-items:center;gap:7px;font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-dk);border:1px solid rgba(158,115,34,.4);border-radius:999px;padding:5px 13px}
 
 /* footer */
-footer{color:var(--paper-4);padding:150px 0 46px;background-repeat:no-repeat;
-  background-color:var(--ink);
-  background-image:linear-gradient(180deg,var(--paper-3),#A8AFA4 34%,var(--ink-3) 66%,var(--ink));
-  background-size:100% 130px}
 .f-top{display:flex;justify-content:space-between;gap:40px;flex-wrap:wrap;align-items:flex-end}
 .f-bar{margin-top:56px;padding-top:22px;border-top:1px solid rgba(239,239,231,.16);display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap;font-family:var(--mono);font-size:12px;color:#8FA79A}
 footer a{color:var(--gold-lt);text-decoration:none}
@@ -294,61 +289,101 @@ footer a{color:var(--gold-lt);text-decoration:none}
 }
 
 /* ============ section transitions ============
-   The page came out of a slide deck, so each section was a flat fill butted
-   against the next with a 1px rule along the join, and every boundary read as
-   a ruled edge.
+   The page came out of a slide deck: flat panels butted together with a rule
+   along the join. Two earlier attempts softened the edge without fixing it,
+   because both kept the blend on one side of the boundary only. The section
+   above stayed flat right up to its last pixel and the change began at the
+   join, so the eye still found the seam.
 
-   Each boundary now blends ONCE, downward. A section starts in the colour of
-   the one above it and resolves into its own over the first 90-130px; nothing
-   fades back out at its bottom. Fading at both ends put two ramps on every
-   join, which read as a halo sitting on the seam rather than one colour giving
-   way to the next.
+   A transition now STRADDLES the join. The block above starts giving way
+   before it ends, the block below finishes the change, and both meet at the
+   same mid colour on the boundary, so there is no step in the colour or in
+   the rate it changes.
 
-   The ramp is a background-image sized to the blend depth over a
-   background-color of the section's own shade, so only the top is a gradient
-   and the rest is flat.
+   The distances are deliberately long. Between the paper and the dark panel
+   the change runs about 370px, roughly a third of a screen: at 130px a fade
+   still reads as a band of smear sitting on the seam, and the only way to
+   stop it reading as an object is to make it too gradual to locate.
 
-   Stops are weighted, not evenly spaced: a straight fade between the dark
-   panel and the paper spends its middle in a flat grey that reads as haze, so
-   most of the travel stays near the dark end with a desaturated sage between.
+   --seam is the meeting colour, a desaturated sage sitting between the paper
+   and the ink. Both sides interpolate to it rather than to each other, which
+   keeps the blend out of the muddy greys a direct paper-to-ink fade passes
+   through.
 
-   Every ramp sits inside the section's top padding, so no text lands on a
-   blend. That is why the sections carrying a 130px ramp get a deeper
-   padding-top than the 112px default. */
+   Ramps are background layers sized to their depth over the section's own
+   background-color, so only the ends are gradients. Every ramp sits inside
+   the padding, so no text lands on a blend. */
 .seamed{position:relative}
 
-.blend{background-repeat:no-repeat}
+:root{--seam:#8B9791}
 
-/* paper -> tinted paper */
-.b-tint{
+/* --- into and out of a dark block ------------------------------- */
+.x-top-ink{                       /* paper block coming out from under one */
+  background-color:var(--paper);
+  background-image:linear-gradient(180deg,var(--seam),var(--paper));
+  background-size:100% 170px;background-position:top;background-repeat:no-repeat;
+  padding-top:196px;
+}
+.dark{
+  color:var(--paper-4);
+  background-color:var(--ink);
+  background-image:
+    linear-gradient(180deg,var(--seam),var(--ink)),
+    linear-gradient(180deg,var(--ink),var(--seam));
+  background-size:100% 200px,100% 200px;
+  background-position:top,bottom;
+  background-repeat:no-repeat,no-repeat;
+  padding:236px 0;
+}
+
+/* A block that ramps at BOTH ends declares both layers here. Stacking two
+   single-end classes on one element does not work: the second background-image
+   replaces the first rather than adding to it. */
+.x-tint-down{                     /* paper above, dark below */
+  background-color:var(--paper-3);
+  background-image:
+    linear-gradient(180deg,var(--paper),var(--paper-3)),
+    linear-gradient(180deg,var(--paper-3),var(--seam));
+  background-size:100% 150px,100% 170px;
+  background-position:top,bottom;
+  background-repeat:no-repeat,no-repeat;
+  padding:150px 0 196px;
+}
+.x-flat-down{                     /* already tinted above, dark below */
+  background-color:var(--paper-3);
+  background-image:linear-gradient(180deg,var(--paper-3),var(--seam));
+  background-size:100% 170px;background-position:bottom;background-repeat:no-repeat;
+  padding-bottom:196px;
+}
+
+/* --- between the two paper tones -------------------------------- */
+/* Only a few points apart, so these need far less room to disappear. */
+.x-tint{
   background-color:var(--paper-3);
   background-image:linear-gradient(180deg,var(--paper),var(--paper-3));
-  background-size:100% 90px;
+  background-size:100% 150px;background-position:top;background-repeat:no-repeat;
+  padding-top:150px;
 }
-/* tinted paper -> paper */
-.b-plain{
+.x-plain{
   background-color:var(--paper);
   background-image:linear-gradient(180deg,var(--paper-3),var(--paper));
-  background-size:100% 90px;
-}
-/* ink -> paper, coming out from under a dark block */
-.b-from-ink{
-  background-color:var(--paper);
-  background-image:linear-gradient(180deg,var(--ink),var(--ink-3) 34%,#A8AFA4 66%,var(--paper));
-  background-size:100% 130px;
-  padding-top:168px;
-}
-/* tinted paper -> ink, going into a dark block */
-.b-to-ink{
-  background-color:var(--ink);
-  background-image:linear-gradient(180deg,var(--paper-3),#A8AFA4 34%,var(--ink-3) 66%,var(--ink));
-  background-size:100% 130px;
-  padding-top:168px;
+  background-size:100% 150px;background-position:top;background-repeat:no-repeat;
+  padding-top:150px;
 }
 
-/* The hero opens the page, so it has nothing above to blend from and stays
-   flat. The section below it carries that transition instead. */
-.hero{padding:132px 0 118px}
+/* --- the two ends of the page ----------------------------------- */
+.hero{
+  padding:132px 0 210px;
+  background-color:var(--ink);
+  background-image:linear-gradient(180deg,var(--ink),var(--seam));
+  background-size:100% 190px;background-position:bottom;background-repeat:no-repeat;
+}
+footer{
+  color:var(--paper-4);padding:236px 0 46px;
+  background-color:var(--ink);
+  background-image:linear-gradient(180deg,var(--seam),var(--ink));
+  background-size:100% 200px;background-position:top;background-repeat:no-repeat;
+}
 
 /* Reduced motion: no travel, no drift, no autonomous animation, but a plain
    opacity fade stays, and the progress hairline tracks the user's own scroll. */
@@ -399,7 +434,7 @@ footer a{color:var(--gold-lt);text-decoration:none}
 </div>
 
 <!-- ============ THE BURDEN ============ -->
-<section id="work" class="blend b-from-ink">
+<section id="work" class="x-top-ink">
   <div class="wrap two">
     <div>
       <div class="eyebrow reveal"><span class="eyebrow-txt">Who keeps the air clean</span></div>
@@ -418,7 +453,7 @@ footer a{color:var(--gold-lt);text-decoration:none}
 </section>
 
 <!-- ============ WHAT CHANGED ============ -->
-<section class="blend b-tint">
+<section class="x-tint-down">
   <div class="wrap two">
     <div>
       <div class="eyebrow reveal"><span class="eyebrow-txt">What changed</span></div>
@@ -470,7 +505,7 @@ footer a{color:var(--gold-lt);text-decoration:none}
 </section>
 
 <!-- ============ THE LOGIC ============ -->
-<section class="dark blend b-to-ink">
+<section class="dark">
   <div class="wrap">
     <div class="eyebrow reveal"><span class="eyebrow-txt">The logic</span></div>
     <h2 class="reveal" style="max-width:20ch;font-size:clamp(26px,3.4vw,44px)">When the work is recorded, <span class="it">people can see it</span>.</h2>
@@ -480,7 +515,7 @@ footer a{color:var(--gold-lt);text-decoration:none}
 </section>
 
 <!-- ============ HOW IT WORKS ============ -->
-<section id="how" class="blend b-from-ink">
+<section id="how" class="x-top-ink">
   <div class="wrap">
     <div class="eyebrow reveal"><span class="eyebrow-txt">How it works</span></div>
     <h2 class="reveal">Three steps, start to finish.</h2>
@@ -494,7 +529,7 @@ footer a{color:var(--gold-lt);text-decoration:none}
 </section>
 
 <!-- ============ FOR SPONSORS ============ -->
-<section id="sponsors" class="blend b-tint">
+<section id="sponsors" class="x-tint">
   <div class="wrap two">
     <div>
       <div class="eyebrow reveal"><span class="eyebrow-txt">For sponsors</span></div>
@@ -531,7 +566,7 @@ footer a{color:var(--gold-lt);text-decoration:none}
 </section>
 
 <!-- ============ YOUR NAME GOES ON ============ -->
-<section id="name" class="blend b-plain">
+<section id="name" class="x-plain">
   <div class="wrap">
     <div class="eyebrow reveal"><span class="eyebrow-txt">Your name goes on</span></div>
     <h2 class="reveal" style="max-width:26ch">Recognition you can point at, <span class="it">and anyone can check</span>.</h2>
@@ -679,7 +714,7 @@ footer a{color:var(--gold-lt);text-decoration:none}
 </section>
 
 <!-- ============ DOCUMENTS ============ -->
-<section id="docs" class="blend b-tint">
+<section id="docs" class="x-tint">
   <div class="wrap">
     <div class="eyebrow reveal"><span class="eyebrow-txt">Documents</span></div>
     <h2 class="reveal">Read the protocol for yourself.</h2>
@@ -712,7 +747,7 @@ footer a{color:var(--gold-lt);text-decoration:none}
 </section>
 
 <!-- ============ GETTING STARTED ============ -->
-<section id="start" style="background:var(--paper-3)">
+<section id="start" class="x-flat-down">
   <div class="wrap">
     <div class="eyebrow reveal"><span class="eyebrow-txt">Getting started</span></div>
     <h2 class="reveal">Getting started is simple.</h2>

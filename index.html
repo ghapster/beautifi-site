@@ -555,7 +555,11 @@ footer a{color:var(--gold-lt);text-decoration:none}
         <div class="eyebrow reveal"><span class="rule"></span><span class="eyebrow-txt">The public record</span></div>
         <h2 class="reveal">Every hour lands here, <span class="it">as it happens</span>.</h2>
       </div>
-      <span class="demo-tag reveal">Illustrative preview</span>
+      <a class="demo-tag reveal" id="recordTag" href="https://beautifi-demo.onrender.com/feed.html" target="_blank" rel="noopener" style="text-decoration:none">
+        <span class="dot pulse" style="width:7px;height:7px;border-radius:50%;background:currentColor"></span>
+        <span id="recordTagTxt">Live demo network</span>
+        <span style="opacity:.6">↗</span>
+      </a>
     </div>
 
     <p class="lede reveal" style="margin-top:22px;max-width:60ch">Work entries and sponsor settlements arrive in one public timeline. Each is methodology-pinned, evidence-linked, and independently reproducible.</p>
@@ -616,7 +620,10 @@ footer a{color:var(--gold-lt);text-decoration:none}
         </div>
       </div>
     </div>
-    <p class="mono-note reveal" style="margin-top:18px">Illustrative preview of the public feed — representative entries, not current network data.</p>
+    <p class="mono-note reveal" style="margin-top:18px" id="recordNote">Entries above are pulled live from the running demonstration network, where salon activity is simulated. The protocol, the checks and the record are real.</p>
+    <p class="reveal" style="margin-top:18px">
+      <a class="btn btn-g" href="https://beautifi-demo.onrender.com/feed.html" target="_blank" rel="noopener">Open the live record ↗</a>
+    </p>
   </div>
 </section>
 
@@ -885,6 +892,167 @@ document.documentElement.classList.add('js');
     document.body.removeChild(ta);
     flash(ok);
   }
+})();
+
+/* ============================================================
+   THE LIVE RECORD — real entries from the running network
+   ============================================================
+   The cards in the markup are a fallback, not the content. If the network is
+   unreachable — Render restarting, someone offline, the page opened from a
+   file — they stay exactly as they are and the section still reads correctly.
+   They are only replaced once real data is actually in hand.
+
+   Read-only, no key: these are the same public views the demo's own feed page
+   uses, opened for cross-origin reads on GET.
+   ============================================================ */
+(function(){
+  var API  = 'https://beautifi-demo.onrender.com';
+  var LIST = document.getElementById('liveList');
+  var CNT  = document.getElementById('entryCount');
+  if(!LIST) return;
+
+  function esc(t){
+    return String(t == null ? '' : t)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+  }
+
+  /* The demo derives a salon from the trailing digits of the device id, and
+     the same mapping is repeated here so a salon reads the same in both
+     places. Keep the two lists in step if either changes. */
+  var CITIES = ['Boston, MA','Portland, OR','Austin, TX','Chicago, IL','Miami, FL',
+                'Seattle, WA','Denver, CO','Nashville, TN','Brooklyn, NY','Oakland, CA'];
+  var NAMES  = ['Glow Studio','Nail Bar','Beauty Lab','The Salon','Luxe Nails',
+                'Studio 9','Pure Nails','Bloom Beauty','The Nail Room','Luminary'];
+
+  function salon(device){
+    var m = String(device||'').match(/(\d+)$/);
+    var n = m ? parseInt(m[1],10) : 1;
+    var name = NAMES[n % NAMES.length];
+    return {
+      name: name,
+      loc:  CITIES[n % CITIES.length],
+      mark: name.split(' ').map(function(w){return w[0];}).join('').slice(0,2).toUpperCase()
+    };
+  }
+
+  function ago(ts){
+    var mins = Math.round((Date.now() - new Date(ts).getTime()) / 60000);
+    if(!isFinite(mins) || mins < 1) return 'just now';
+    if(mins < 60) return mins + 'm ago';
+    var h = Math.round(mins/60);
+    return h < 24 ? h + 'h ago' : Math.round(h/24) + 'd ago';
+  }
+
+  function window_(e){
+    var d = new Date(e.timestamp);
+    if(isNaN(d)) return '';
+    var day  = d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    var from = d.toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+    var to   = new Date(d.getTime()+3600000).toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+    return day + ' &nbsp;|&nbsp; ' + from + ' — ' + to;
+  }
+
+  function workCard(e){
+    var s = salon(e.device_id);
+    var failed = e.event_type === 'EPOCH_FAILED';
+    var summary = failed
+      ? 'Hour rejected — did not meet the checks'
+      : '1 Verified Mitigation Hour of source-capture operation';
+    return '' +
+      '<div class="card-art"><div class="wc">' +
+        '<div class="wc-row">' +
+          '<div class="wc-node">' + esc(s.mark) + '</div>' +
+          '<div class="wc-body">' +
+            '<div class="wc-id"><span class="wc-name">' + esc(s.name) + '</span>' +
+              '<span class="wc-loc">' + esc(s.loc) + '</span></div>' +
+            '<div class="wc-sum">' + esc(summary) + '</div>' +
+            '<div class="wc-when">' + window_(e) + '</div>' +
+          '</div>' +
+          '<span class="wc-time">' + esc(ago(e.timestamp)) + '</span>' +
+        '</div>' +
+        '<div class="wc-acts"><span class="a">👏 ' + (e.applauds || 0) + '</span>' +
+          '<span class="sep"></span><span class="a">Share ↗</span>' +
+          '<span class="sep"></span><span class="a">Proof ↗</span>' +
+          '<span class="more">Details ▾</span></div>' +
+      '</div></div>';
+  }
+
+  function sponsorCard(e){
+    var name = e.sponsor_name || e.sponsor_id || 'Sponsor';
+    return '' +
+      '<div class="sp"><div class="sp-hero" style="padding:20px 22px">' +
+        '<span class="sp-pill"><span class="dot" style="background:var(--sage-lt)"></span>VMH Retired</span>' +
+        '<div class="sp-brand">' +
+          '<div class="sp-logo" style="width:40px;height:40px;font-size:18px">' + esc(name.charAt(0).toUpperCase()) + '</div>' +
+          '<div><div class="sp-name" style="font-size:21px">' + esc(name) + '</div>' +
+            '<div class="sp-sub">Verified mitigation work · funded at the source</div></div>' +
+        '</div>' +
+        '<div class="sp-claim" style="margin-top:15px;padding:12px 14px">' +
+          '<div class="sp-check" style="width:26px;height:26px;font-size:13px">✓</div>' +
+          '<div><div class="sp-claim-h" style="font-size:14.5px"><b>1 Verified Mitigation Hour</b> retired from the public pool</div></div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="sp-foot" style="padding:11px 18px">' +
+        '<span class="chip">↲ Methodology v0.1.0</span>' +
+        '<span class="when">' + esc(ago(e.retired_at || e.timestamp)) + '</span>' +
+      '</div></div>';
+  }
+
+  function paint(entries, total){
+    var html = entries.map(function(e){
+      return e.event_type === 'VMH_RETIRED' ? sponsorCard(e) : workCard(e);
+    }).join('');
+    if(!html) return;                 /* nothing usable — keep the fallback */
+    LIST.innerHTML = html;
+    if(CNT && total) CNT.textContent = total.toLocaleString();
+  }
+
+  function load(){
+    /* Settlements come from their own endpoint, not from the feed. A retirement
+       updates the minted hour's entry in place, so it keeps that hour's
+       timestamp and never appears among the newest entries — filtering the feed
+       for one returns nothing. */
+    Promise.all([
+      fetch(API + '/api/feed?limit=20', { cache:'no-store' })
+        .then(function(r){ return r.ok ? r.json() : Promise.reject(r.status); }),
+      fetch(API + '/api/settlements/recent?limit=1', { cache:'no-store' })
+        .then(function(r){ return r.ok ? r.json() : { settlements:[] }; })
+        .catch(function(){ return { settlements:[] }; })
+    ]).then(function(res){
+      var feed = res[0], settled = res[1];
+
+      /* One card per salon. The busiest salons post several hours in a row, and
+         the same name twice running looks like a rendering fault rather than a
+         busy salon. */
+      var seen = {}, passed = [], rejected = [];
+      (feed.entries || []).forEach(function(e){
+        if(e.event_type === 'VMH_RETIRED') return;
+        var s = salon(e.device_id).name;
+        if(seen[s]) return;
+        seen[s] = 1;
+        (e.event_type === 'EPOCH_FAILED' ? rejected : passed).push(e);
+      });
+
+      /* Show at most one rejected hour. Roughly one hour in eight is rejected,
+         but this is a sample of three — and an unlucky draw where two of them
+         failed reads as a network that mostly doesn't work. One rejection is
+         honest and is worth showing: it is the evidence the checks bite. */
+      var work = passed.concat(rejected.slice(0,1));
+      if(rejected.length && passed.length >= 2){
+        work = [passed[0], rejected[0]].concat(passed.slice(1));
+      }
+
+      /* A settlement between the hours, so the section shows both halves of
+         what the network does rather than a wall of identical entries. */
+      var spon = (settled.settlements || []).slice(0,1);
+      var mix  = work.slice(0,1).concat(spon, work.slice(1,3));
+      paint(mix.filter(Boolean), feed.total);
+    }).catch(function(){ /* leave the fallback cards in place */ });
+  }
+
+  load();
+  setInterval(load, 20000);
 })();
 
 </script>

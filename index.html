@@ -126,6 +126,36 @@ header.nav{position:sticky;top:0;z-index:60;background:rgba(247,244,236,.86);bac
 .btn-p:hover{transform:translateY(-1px);background:var(--gold-dk)}
 .btn-g{border:1px solid var(--line);color:var(--ink)}
 .btn-g:hover{background:var(--paper-3)}
+/* ============ mobile width containment ============
+   Grid and flex items default to min-width:auto, which means "never shrink
+   below my content". One unwrappable child therefore widens its whole track
+   and pushes the page sideways. Measured culprit: the embed snippet's <pre>,
+   min-content 408px against a 326px content area on a 390px screen.
+
+   min-width:0 lets the tracks shrink; the code block then scrolls inside its
+   own box instead of taking the page with it. */
+.two > *, .three > *, .surfaces > *, .docs > *, .hero-grid > *,
+.pf-stats > *, .steps > * { min-width: 0; }
+
+.snippet { min-width: 0; }
+.snippet pre { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+
+/* Long unbroken strings — hashes, ids, URLs — are the other way a page gets
+   pushed wide. These may break mid-token rather than overflow. */
+.proof-row .v, .browser-url, .snippet code, .mono-note,
+.badge-s, .card-art .wc-when { overflow-wrap: anywhere; }
+
+/* Nothing may exceed the viewport, whatever its content. Belt and braces: the
+   rules above fix the cause, this stops any future one reaching the user. */
+img, svg, video, canvas, pre, table { max-width: 100%; }
+
+@media (max-width: 700px) {
+  .wrap { padding: 0 20px; }
+  .nav-in { padding: 14px 20px; }
+  /* The browser mock and badge are fixed-ish artefacts; let them scale. */
+  .browser, .badge, .snippet { max-width: 100%; }
+}
+
 /* ============ mobile navigation ============
    Under 860px the inline links are hidden, so the burger and panel take over.
    Above it they do not exist as far as the layout is concerned. */

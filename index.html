@@ -126,6 +126,7 @@ header.nav{position:sticky;top:0;z-index:60;background:rgba(247,244,236,.86);bac
 .btn-p:hover{transform:translateY(-1px);background:var(--gold-dk)}
 .btn-g{border:1px solid var(--line);color:var(--ink)}
 .btn-g:hover{background:var(--paper-3)}
+
 /* ============ mobile width containment ============
    Grid and flex items default to min-width:auto, which means "never shrink
    below my content". One unwrappable child therefore widens its whole track
@@ -556,6 +557,53 @@ footer{
   .pulse,.arrive,.hero:after,.sp-hero:after,.pf-cover:after{animation:none}
   .card-art,.step,.badge,.leaving{transition:none}
 }
+
+/* ============ mobile vertical rhythm ============
+   Desktop padding is sized to clear the section-transition ramps. On a phone
+   those same numbers are a third of the screen, so ramps and padding scale
+   down together — roughly 60% — keeping text clear of the gradients while
+   removing the dead space between sections.
+
+   Two column-gaps also disappear here: .hero-grid stacks, so its 52px gap sat
+   between the image and the copy for no reason. */
+@media (max-width: 700px) {
+  section { padding: 66px 0; }
+
+  .hero { padding: 34px 0 78px; background-size: 100% 110px; }
+  .hero-grid { gap: 26px; }
+  .hero h1 { font-size: clamp(38px, 11vw, 52px); }
+  .hero .lede { margin-top: 18px; }
+  .hero-cta { margin-top: 26px; }
+  /* The art is ordered first when stacked, so it sets the top of the page. */
+  .hero-art { max-width: 300px; margin: 0 auto; }
+
+  .x-top-ink   { padding-top: 74px;            background-size: 100% 118px; }
+  .x-tint-down { padding: 66px 0 76px;         background-size: 100% 72px, 100% 112px; }
+  .x-flat-down { padding-bottom: 76px;         background-size: 100% 112px; }
+  .x-tint      { padding-top: 66px;            background-size: 100% 72px; }
+  .x-plain     { padding-top: 66px;            background-size: 100% 72px; }
+  .dark        { padding: 88px 0;              background-size: 100% 124px, 100% 124px; }
+  footer       { padding: 88px 0 40px;         background-size: 100% 124px; }
+
+  /* Headings and leads carry desktop-sized margins too. */
+  h2 { font-size: clamp(30px, 8.5vw, 40px); }
+  .eyebrow { margin-bottom: 18px; }
+  .lede { margin-top: 16px !important; }
+  .owner-cta { margin-top: 24px; }
+  .two, .three, .surfaces, .docs { gap: 26px; }
+}
+
+/* Very small screens: one more step down. */
+@media (max-width: 420px) {
+  section { padding: 56px 0; }
+  .hero { padding: 26px 0 66px; }
+  .dark { padding: 76px 0; }
+  .x-top-ink { padding-top: 64px; }
+  .x-tint-down { padding: 56px 0 66px; }
+  .x-flat-down { padding-bottom: 66px; }
+  .x-tint, .x-plain { padding-top: 56px; }
+}
+
 </style>
 </head>
 <body>

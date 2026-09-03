@@ -34,6 +34,26 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
 
+<!-- Google Analytics (GA4).
+     Loads async, so it never blocks first paint. This site is one page, so
+     this tag is the whole install — there is no second page to forget. -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-E71SXNCK7L"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){ dataLayer.push(arguments); }
+  gtag('js', new Date());
+  gtag('config', 'G-E71SXNCK7L');
+
+  // The one thing worth measuring beyond pageviews: whether anyone actually
+  // goes and looks at the running network. That click is the closest thing
+  // this page has to an intent signal, and it is invisible in plain GA
+  // because the demo is on another domain.
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href*="beautifi-demo.onrender.com"]');
+    if (a) gtag('event', 'demo_click', { link_text: (a.textContent || '').trim().slice(0, 60) });
+  });
+</script>
+
 <style>
 /* ============================================================
    BeautiFi tokens
